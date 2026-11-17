@@ -6,705 +6,319 @@
 <title>David Ekou · MEAL &amp; AI</title>
 <meta name="description" content="David Ekou, MEAL Officer in Kampala, Uganda. Monitoring, evaluation and learning, data quality, dashboards, and AI for development.">
 <meta property="og:title" content="David Ekou · MEAL &amp; AI">
-<meta property="og:description" content="MEAL Officer turning field data into evidence donors trust, and building AI tools for development.">
+<meta property="og:description" content="I measure what changes in young people's lives, and I build AI tools that help programmes learn faster.">
 <meta property="og:image" content="https://ekoudavid.github.io/photo.jpg">
-<meta property="og:type" content="website">
+<meta name="theme-color" content="#14100b">
+<style>html{scroll-behavior:smooth;color-scheme:dark}@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}} a:focus-visible,button:focus-visible{outline:3px solid #f2b400;outline-offset:3px}</style>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
 <style>
-/* Layout idea: a light, airy page; a thin kitenge thread is the only loud note; the live dashboard is the centrepiece. */
-:root{
-  --paper:#f6f5f1;
-  --card:#ffffff;
-  --ink:#1d1b18;
-  --ink-soft:#5b564e;
-  --line:#e3dfd7;
-  --teal:#0f8a78;       /* endline / primary accent */
-  --teal-deep:#0b5f53;
-  --ochre:#c97a12;      /* baseline / warm accent, from the photo */
-  --wash:#e8f3f0;
-  --display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
-  --body:"Hanken Grotesk", "Segoe UI", system-ui, sans-serif;
-  --mono:"JetBrains Mono", ui-monospace, Menlo, monospace;
-  --wrap:1120px;
-  color-scheme:light;
+body{margin:0;background:#14100b}
+a{color:#f2b400}a:hover{color:#ffd04d}
+.band{height:80px;background:url(kitenge.svg) repeat-x 0 0/auto 80px}
+.band.thin{height:40px;background-size:auto 40px}
+.wrap{max-width:1160px;margin:0 auto;padding:0 32px;box-sizing:border-box}
+.hero{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.9fr);gap:64px;align-items:center}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px}
+.case{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.6fr);gap:48px;padding:36px 0;border-top:1px solid rgba(243,234,217,.14)}
+.facts{display:flex;flex-wrap:wrap;gap:0}
+.facts > div{flex:1 1 220px;padding:20px 24px 20px 0;border-right:1px solid rgba(243,234,217,.14);margin-right:24px}
+.facts > div:last-child{border-right:0}
+.job{display:grid;grid-template-columns:200px minmax(0,1fr);gap:32px;padding:28px 0;border-top:1px solid rgba(243,234,217,.14)}
+.seg button{font:inherit;font-size:15px;font-weight:700;color:#bfb19a;background:transparent;border:1.5px solid rgba(243,234,217,.22);border-radius:999px;padding:10px 18px;min-height:44px;cursor:pointer}
+.seg button:hover{color:#f3ead9;border-color:#f3ead9}
+.seg button[aria-pressed="true"]{background:#f2b400;border-color:#f2b400;color:#14100b}
+.dot{position:absolute;top:50%;width:18px;height:18px;border-radius:50%;transform:translate(-50%,-50%);transition:left .6s cubic-bezier(.2,.8,.2,1)}
+.link{position:absolute;top:50%;height:4px;transform:translateY(-50%);background:linear-gradient(90deg,#c94435,#b98800);border-radius:2px;transition:left .6s cubic-bezier(.2,.8,.2,1),width .6s cubic-bezier(.2,.8,.2,1)}
+.btn{display:inline-flex;align-items:center;min-height:48px;padding:0 24px;border-radius:999px;font-weight:700;font-size:16px;text-decoration:none}
+@media (max-width:640px){.dashcard{padding:20px!important}.wrap{padding:0 18px!important}.drow{grid-template-columns:minmax(0,1fr) 56px!important;row-gap:14px!important}.drow > div:first-child{grid-column:1/-1}.axisrow > span:first-child{display:none}}
+@media (max-width:900px){
+  .hero,.two,.case,.job{grid-template-columns:minmax(0,1fr);gap:24px}
+  .facts > div{border-right:0;margin-right:0;border-bottom:1px solid rgba(243,234,217,.14)}
 }
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
-a{color:inherit}
-a:focus-visible,button:focus-visible{outline:3px solid var(--teal);outline-offset:3px;border-radius:6px}
-img{max-width:100%;display:block}
-.wrap{max-width:var(--wrap);margin:0 auto;padding:0 24px}
-h1,h2,h3{font-family:var(--display);line-height:1.08;text-wrap:balance;margin:0;letter-spacing:-.015em}
-p{margin:0}
-[hidden]{display:none!important}
-.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
-
-/* kitenge thread */
-.thread{height:8px;background:repeating-linear-gradient(90deg,var(--ochre) 0 18px,transparent 18px 24px,var(--teal) 24px 42px,transparent 42px 48px,var(--ink) 48px 54px,transparent 54px 60px)}
-
-/* nav */
-.bar{position:sticky;top:0;z-index:30;background:rgba(246,245,241,.85);backdrop-filter:blur(12px);border-bottom:1px solid transparent;transition:border-color .2s}
-.bar.scrolled{border-bottom-color:var(--line)}
-.bar .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;height:64px}
-.mark{font-family:var(--display);font-weight:800;font-size:19px;text-decoration:none;display:flex;align-items:center;gap:12px}
-.mark i{width:12px;height:12px;background:var(--teal);transform:rotate(45deg);box-shadow:5px -5px 0 -1px var(--ochre)}
-.nav{display:flex;gap:2px}
-.nav a{text-decoration:none;font-size:15px;font-weight:500;color:var(--ink-soft);padding:7px 12px;border-radius:999px;transition:background .2s,color .2s}
-.nav a:hover,.nav a.on{color:var(--ink);background:var(--card)}
-.nav a.cta-mini{background:var(--ink);color:var(--paper)}
-@media (max-width:820px){.nav a:not(.cta-mini){display:none}}
-
-/* hero */
-.hero{padding:64px 0 56px}
-.hero-grid{display:grid;grid-template-columns:1.25fr .85fr;gap:56px;align-items:center}
-@media (max-width:900px){.hero-grid{grid-template-columns:1fr;gap:48px}}
-.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:14px;font-weight:700;color:var(--teal-deep);background:var(--wash);padding:6px 14px;border-radius:999px}
-.eyebrow .dot{width:8px;height:8px;border-radius:50%;background:var(--teal);position:relative}
-.eyebrow .dot::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--teal);animation:ping 2s ease-out infinite}
-@keyframes ping{to{transform:scale(2.6);opacity:0}}
-.hero h1{font-size:clamp(42px,6.6vw,80px);font-weight:800;margin-top:22px}
-.hero h1 .hl{color:var(--teal)}
-.hero h1 .ai{position:relative;white-space:nowrap;z-index:0}
-.hero h1 .ai::after{content:"";position:absolute;left:-3%;right:-3%;bottom:.08em;height:.24em;background:var(--ochre);opacity:.35;z-index:-1;border-radius:3px}
-.typer{margin-top:22px;font-family:var(--mono);font-size:16px;color:var(--ink-soft);min-height:1.6em}
-.typer b{color:var(--ink);font-weight:600}
-.typer .caret{display:inline-block;width:9px;height:1.1em;background:var(--teal);vertical-align:-.18em;margin-left:2px;animation:blink 1s steps(1) infinite}
-@keyframes blink{50%{opacity:0}}
-.lede{font-size:19px;color:var(--ink-soft);max-width:56ch;margin-top:18px}
-.lede strong{color:var(--ink)}
-.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px;align-items:center}
-.btn{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:15px;text-decoration:none;padding:13px 22px;border-radius:999px;border:1.5px solid var(--ink);transition:transform .2s,box-shadow .2s;cursor:pointer;font-family:inherit;background:none;color:var(--ink)}
-.btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px -10px rgba(29,27,24,.5)}
-.btn.solid{background:var(--ink);color:var(--paper)}
-
-.portrait{position:relative;justify-self:center;width:min(100%,380px);z-index:0}
-.portrait .frame{position:relative;border-radius:28px;overflow:hidden;aspect-ratio:4/5;background:var(--wash);box-shadow:0 30px 60px -30px rgba(29,27,24,.45)}
-.portrait .frame img{width:100%;height:100%;object-fit:cover;object-position:50% 30%}
-.portrait::before{content:"";position:absolute;inset:18px -18px -18px 18px;border-radius:28px;z-index:-1;background:repeating-linear-gradient(45deg,transparent 0 10px,rgba(201,122,18,.22) 10px 12px),var(--paper);border:1.5px solid rgba(201,122,18,.35)}
-.badge{position:absolute;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px 16px;box-shadow:0 14px 30px -16px rgba(29,27,24,.35);font-size:14px;line-height:1.35}
-.badge b{display:block;font-family:var(--display);font-size:22px;color:var(--teal)}
-.badge.b1{left:-34px;bottom:44px}
-.badge.b2{right:-26px;top:30px}
-@media (max-width:520px){.badge.b1{left:-6px}.badge.b2{right:-6px}}
-.float{animation:float 6s ease-in-out infinite}
-.float.d{animation-delay:-3s}
-@keyframes float{50%{transform:translateY(-8px)}}
-
-/* stats */
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:56px}
-.stat{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px}
-.stat b{display:block;font-family:var(--display);font-weight:800;font-size:clamp(32px,4vw,44px);line-height:1;font-variant-numeric:tabular-nums}
-.stat span{display:block;margin-top:8px;font-size:14.5px;color:var(--ink-soft)}
-@media (max-width:760px){.stats{grid-template-columns:1fr 1fr}}
-
-/* sections */
-section{padding:96px 0 0}
-.head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:36px}
-.kicker{font-family:var(--mono);font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ochre);margin-bottom:10px;display:block;font-weight:600}
-.head h2,.bio h2{font-size:clamp(30px,4.2vw,48px);font-weight:800}
-.head p{max-width:46ch;color:var(--ink-soft)}
-
-/* about + logframe */
-.about{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
-@media (max-width:900px){.about{grid-template-columns:1fr}}
-.bio h2{margin-bottom:22px}
-.bio p{font-size:18px;color:var(--ink-soft);margin-bottom:16px;max-width:60ch}
-.bio strong{color:var(--ink)}
-.logframe{background:var(--card);border:1px solid var(--line);border-radius:20px;overflow:hidden;font-size:15px}
-.logframe header{display:flex;justify-content:space-between;padding:14px 18px;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
-.lf-row{display:grid;grid-template-columns:120px 1fr;border-bottom:1px solid var(--line);transition:background .2s}
-.lf-row:hover{background:var(--wash)}
-.lf-row:last-child{border-bottom:0}
-.lf-row dt{padding:14px 16px;font-family:var(--mono);font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-soft);border-right:1px solid var(--line)}
-.lf-row dd{margin:0;padding:14px 16px}
-.lf-row.goal dd{font-weight:700;color:var(--teal-deep)}
-dl{margin:0}
-
-/* dashboard */
-.dash{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:28px;box-shadow:0 30px 60px -40px rgba(29,27,24,.35)}
-.dash-top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;margin-bottom:8px}
-.dash-top h3{font-size:22px;font-weight:700}
-.dash-top small{display:block;color:var(--ink-soft);font-size:14px;margin-top:4px}
-.demo-tag{font-family:var(--mono);font-size:11.5px;text-transform:uppercase;letter-spacing:.08em;color:#8a520a;border:1px solid currentColor;border-radius:999px;padding:4px 10px;white-space:nowrap}
-.filters{display:flex;flex-wrap:wrap;gap:20px;align-items:center;padding:14px 0 22px;border-bottom:1px solid var(--line)}
-.filter{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.filter > span{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-soft)}
-.seg{display:inline-flex;flex-wrap:wrap;background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:3px}
-.seg button{font:inherit;font-size:14px;font-weight:600;border:0;background:none;color:var(--ink-soft);padding:6px 14px;border-radius:999px;cursor:pointer;transition:background .2s,color .2s}
-.seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
-.seg button:hover:not([aria-pressed="true"]){color:var(--ink)}
-.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:22px 0}
-.kpi{background:var(--paper);border-radius:14px;padding:16px 18px}
-.kpi span{font-size:13.5px;color:var(--ink-soft)}
-.kpi b{display:block;font-family:var(--display);font-size:30px;font-weight:800;font-variant-numeric:tabular-nums;line-height:1.15}
-.kpi b.up{color:var(--teal-deep)}
-@media (max-width:620px){.kpis{grid-template-columns:1fr}}
-.chart-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px}
-.legend{display:flex;gap:18px;font-size:14px;color:var(--ink-soft)}
-.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
-.linkbtn{font:inherit;font-size:14px;font-weight:600;color:var(--teal-deep);background:none;border:0;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
-.chart{position:relative}
-.dom{display:grid;grid-template-columns:110px 1fr;gap:14px;align-items:center;padding:12px 0;border-top:1px solid var(--line)}
-.dom:first-child{border-top:0}
-.dom .name{font-weight:700;font-size:15px}
-.dom .name small{display:block;font-weight:500;color:var(--ink-soft);font-size:13px}
-.bars{display:grid;gap:2px;background:linear-gradient(90deg,var(--line) 1px,transparent 1px) 0 0/25% 100%}
-.bar-row{position:relative;height:22px;cursor:default}
-.bar-row .fill{position:absolute;left:0;top:3px;height:16px;border-radius:0 4px 4px 0;transition:width .7s cubic-bezier(.2,.8,.2,1)}
-.bar-row .val{position:absolute;top:0;font-family:var(--mono);font-size:12.5px;line-height:22px;color:var(--ink-soft);font-variant-numeric:tabular-nums;white-space:nowrap;padding-left:8px;transition:left .7s cubic-bezier(.2,.8,.2,1)}
-.bar-row.end .val{color:var(--ink);font-weight:600}
-.axis{display:grid;grid-template-columns:110px 1fr;gap:14px;font-family:var(--mono);font-size:11.5px;color:var(--ink-soft);margin-top:4px}
-.axis div{position:relative;height:16px}
-.axis div span{position:absolute;transform:translateX(-50%)}
-.axis div span:first-child{transform:none}
-.axis div span:last-child{transform:translateX(-100%)}
-.tip{position:absolute;pointer-events:none;background:var(--ink);color:var(--paper);font-size:13px;line-height:1.45;padding:8px 12px;border-radius:10px;opacity:0;transform:translateY(4px);transition:opacity .15s,transform .15s;white-space:nowrap;z-index:5}
-.tip.show{opacity:1;transform:none}
-.insight{margin-top:20px;display:flex;gap:12px;align-items:flex-start;background:var(--wash);border-radius:14px;padding:14px 18px;font-size:15.5px}
-.insight::before{content:"";flex:none;width:10px;height:10px;margin-top:7px;background:var(--teal);transform:rotate(45deg)}
-table.data{width:100%;border-collapse:collapse;font-size:14.5px;font-variant-numeric:tabular-nums}
-table.data caption{text-align:left;padding:8px 0;color:var(--ink-soft);font-size:14px}
-table.data th,table.data td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line)}
-table.data th{font-family:var(--mono);font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-soft);font-weight:600}
-.dash-note{margin-top:16px;font-size:13.5px;color:var(--ink-soft)}
-
-/* cases */
-.cases{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-@media (max-width:960px){.cases{grid-template-columns:1fr}}
-.case{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:26px;display:flex;flex-direction:column;gap:14px;transition:transform .25s,box-shadow .25s,opacity .7s}
-.case:hover{transform:translateY(-4px);box-shadow:0 22px 40px -28px rgba(29,27,24,.45)}
-.case .tag{font-family:var(--mono);font-size:12px;color:var(--c);text-transform:uppercase;letter-spacing:.08em;font-weight:600;display:flex;align-items:center;gap:8px}
-.case .tag::before{content:"";width:8px;height:8px;background:var(--c);transform:rotate(45deg)}
-.case h3{font-size:21px;font-weight:700}
-.case dl div{display:grid;grid-template-columns:70px 1fr;gap:10px;padding:10px 0;border-top:1px solid var(--line);font-size:15px}
-.case dt{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-soft);padding-top:3px}
-.case dd{margin:0}
-.note{margin-top:18px;font-size:14px;color:var(--ink-soft)}
-
-/* projects */
-.projects{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
-@media (max-width:820px){.projects{grid-template-columns:1fr}}
-.proj{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:28px;display:flex;flex-direction:column;gap:12px;transition:transform .25s,box-shadow .25s,border-color .25s,opacity .7s}
-.proj:hover{transform:translateY(-4px);box-shadow:0 22px 40px -28px rgba(29,27,24,.45);border-color:var(--teal)}
-.proj.feature{grid-column:1/-1;background:linear-gradient(120deg,var(--card) 55%,var(--wash))}
-.status{align-self:flex-start;font-family:var(--mono);font-size:11.5px;text-transform:uppercase;letter-spacing:.08em;padding:4px 10px;border-radius:999px;font-weight:600}
-.status.live{background:var(--wash);color:var(--teal-deep)}
-.status.build{background:#fbf0de;color:#8a520a}
-.status.research{background:#efeeea;color:var(--ink-soft)}
-.proj h3{font-size:23px;font-weight:700}
-.proj p{color:var(--ink-soft);max-width:70ch}
-.chips{display:flex;flex-wrap:wrap;gap:8px;list-style:none;margin:0;padding:0}
-.chips li{font-size:13px;font-weight:500;padding:5px 12px;border-radius:999px;background:var(--paper);border:1px solid var(--line)}
-.links{display:flex;gap:20px;flex-wrap:wrap;margin-top:auto;padding-top:6px}
-.links a{font-weight:700;font-size:15px;color:var(--teal-deep);text-decoration:none}
-.links a:hover{text-decoration:underline;text-underline-offset:3px}
-.links a::after{content:" \2197"}
-
-/* timeline */
-.tl-wrap{position:relative}
-.tl-wrap::before{content:"";position:absolute;left:150px;top:8px;bottom:48px;width:2px;background:var(--line)}
-.tl-wrap .prog{position:absolute;left:150px;top:8px;width:2px;background:var(--teal);height:0}
-.timeline{list-style:none;margin:0;padding:0}
-.timeline > li{display:grid;grid-template-columns:150px 1fr;gap:40px;padding:0 0 40px;position:relative}
-.timeline > li::before{content:"";position:absolute;left:145px;top:6px;width:12px;height:12px;background:var(--paper);border:2px solid var(--teal);transform:rotate(45deg);z-index:1}
-.timeline .when{font-family:var(--mono);font-size:13px;color:var(--ink-soft);padding-top:2px;font-variant-numeric:tabular-nums}
-.timeline h3{font-size:21px;font-weight:700}
-.timeline .org{color:var(--teal-deep);font-weight:700;margin:4px 0 10px}
-.timeline ul{margin:0;padding-left:18px;color:var(--ink-soft);max-width:68ch}
-@media (max-width:700px){
-  .tl-wrap::before,.tl-wrap .prog{left:5px}
-  .timeline > li{grid-template-columns:1fr;gap:6px;padding-left:32px}
-  .timeline > li::before{left:0}
-}
-
-/* education + tools */
-.edu{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
-@media (max-width:760px){.edu{grid-template-columns:1fr}}
-.edu article{display:grid;grid-template-columns:90px 1fr;gap:16px;padding:22px;border:1px solid var(--line);border-radius:18px;background:var(--card)}
-.edu .yr{font-family:var(--mono);font-size:13px;color:#8a520a;font-weight:600}
-.edu h3{font-size:17px;font-weight:700;line-height:1.3}
-.edu p{color:var(--ink-soft);font-size:15px;margin-top:6px}
-.edu .now{display:inline-block;margin-top:10px;font-size:12px;font-weight:700;color:var(--teal-deep);background:var(--wash);padding:2px 10px;border-radius:999px}
-.toolkit{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;margin-top:48px}
-@media (max-width:900px){.toolkit{grid-template-columns:1fr 1fr}}
-.toolkit h3{font-family:var(--mono);font-size:12.5px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-soft);margin-bottom:12px}
-
-/* writing */
-.posts{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
-@media (max-width:760px){.posts{grid-template-columns:1fr}}
-.post{display:flex;gap:16px;align-items:flex-start;padding:24px;border-radius:20px;text-decoration:none;border:1px solid var(--line);background:var(--card);transition:transform .25s,border-color .25s,opacity .7s}
-.post:hover{transform:translateY(-3px);border-color:var(--teal)}
-.post .ic{flex:none;width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:var(--wash)}
-.post b{display:block;font-size:18px}
-.post span{display:block;color:var(--ink-soft);font-size:15px;margin-top:4px}
-
-/* contact */
-.contact{margin-top:96px;background:var(--ink);color:var(--paper);padding:84px 0;position:relative;overflow:hidden}
-.contact::after{content:"";position:absolute;right:-120px;top:-120px;width:420px;height:420px;border-radius:50%;border:60px solid rgba(15,138,120,.25)}
-.contact .kicker{color:#e9a94f}
-.contact h2{font-size:clamp(32px,5vw,58px);font-weight:800;max-width:15ch}
-.contact .grid{display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:end;position:relative;z-index:1}
-@media (max-width:860px){.contact .grid{grid-template-columns:1fr}}
-.contact .lang{margin-top:20px;font-size:17px;max-width:52ch;color:#cfc9bf}
-.contact ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
-.contact li a{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:15px 20px;border-radius:14px;background:rgba(246,245,241,.07);border:1px solid rgba(246,245,241,.14);text-decoration:none;font-weight:700;transition:background .2s}
-.contact li a:hover{background:rgba(15,138,120,.35)}
-.contact li a small{font-family:var(--mono);font-weight:400;color:#cfc9bf;font-size:13px;overflow-wrap:anywhere;text-align:right}
-.contact .btn{border-color:var(--paper);color:var(--paper)}
-.contact .btn.solid{background:var(--paper);color:var(--ink)}
-.copy-msg{font-size:14px;color:#9fe0d4}
-footer{background:var(--ink);color:#a59f95;font-size:14px;padding:0 0 36px}
-footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;border-top:1px solid rgba(246,245,241,.12);padding-top:24px}
-
-/* reveal on scroll (class added by JS only, so everything shows without it) */
-.js .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1),box-shadow .25s,border-color .25s}
-.js .reveal.in{opacity:1;transform:none}
-.js .reveal.in:hover{transform:translateY(-4px)}
-.js .stat.reveal.in:hover,.js .bio.reveal.in:hover,.js .logframe.reveal.in:hover,.js .dash.reveal.in:hover,.js .head.reveal.in:hover,.js .toolkit.reveal.in:hover,.js .timeline li.reveal.in:hover,.js .edu article.reveal.in:hover{transform:none}
-@media (prefers-reduced-motion:reduce){
-  html{scroll-behavior:auto}
-  *,*::before,*::after{animation:none!important;transition:none!important}
-  .js .reveal{opacity:1;transform:none}
-}
+@media (prefers-reduced-motion:reduce){.dot,.link{transition:none}}
 </style>
 </head>
 <body>
-<div class="thread" aria-hidden="true"></div>
-<nav class="bar" aria-label="Main">
-  <div class="wrap">
-    <a class="mark" href="#top"><i aria-hidden="true"></i>David Ekou</a>
-    <div class="nav">
-      <a href="#about">About</a>
-      <a href="#dashboard">Live demo</a>
-      <a href="#meal">MEAL work</a>
-      <a href="#projects">AI projects</a>
-      <a href="#experience">Experience</a>
-      <a class="cta-mini" href="#contact">Contact</a>
+
+<div style="background:#14100b;color:#f3ead9;font-family:'Hanken Grotesk','Segoe UI',system-ui,sans-serif;font-size:18px;line-height:1.6;min-height:100%">
+
+<!-- top bar -->
+<div class="band"></div>
+<nav aria-label="Main" style="border-bottom:1px solid rgba(243,234,217,.14)">
+  <div class="wrap" style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;min-height:72px">
+    <a href="#top" style="font-family:Unbounded,'Arial Black',sans-serif;font-weight:900;font-size:16px;letter-spacing:.04em;color:#f3ead9;text-decoration:none">DAVID EKOU</a>
+    <div style="display:flex;gap:28px;flex-wrap:wrap;font-size:15px;font-weight:500">
+      <a href="#data" style="color:#bfb19a;text-decoration:none">Live data</a>
+      <a href="#meal" style="color:#bfb19a;text-decoration:none">MEAL work</a>
+      <a href="#ai" style="color:#bfb19a;text-decoration:none">AI projects</a>
+      <a href="#experience" style="color:#bfb19a;text-decoration:none">Experience</a>
+      <a href="#contact" style="color:#f2b400;text-decoration:none;font-weight:700">Contact</a>
     </div>
   </div>
 </nav>
 
-<!-- ============ HERO ============ -->
-<header class="hero" id="top">
-  <div class="wrap">
-    <div class="hero-grid">
-      <div>
-        <span class="eyebrow"><span class="dot" aria-hidden="true"></span>MEAL Officer · Kampala, Uganda · Open to new roles</span>
-        <h1>Field data in. <span class="hl">Decisions</span> out. <span class="ai">AI</span> in between.</h1>
-        <p class="typer"><span aria-hidden="true">I build&nbsp;</span><b id="typed">donor-ready dashboards</b><span class="caret" aria-hidden="true"></span></p>
-        <p class="lede">I'm <strong>David Ekou</strong>, a Monitoring, Evaluation, Accountability &amp; Learning professional who turns surveys, registers and records into evidence that programme teams act on and donors trust. I'm also <strong>passionate about AI</strong>: I study it, build with it, and research how African institutions can adopt it responsibly.</p>
-        <div class="cta">
-          <a class="btn solid" href="#dashboard">Try the live dashboard</a>
-          <a class="btn" href="cv.pdf" target="_blank" rel="noopener">Download CV</a>
-        </div>
-      </div>
-      <div class="portrait">
-        <div class="frame"><img src="photo.jpg" alt="Portrait of David Ekou, smiling, in an orange and white shirt" width="800" height="800"></div>
-        <div class="badge b1 float"><b>4+ years</b>MEAL &amp; health data</div>
-        <div class="badge b2 float d"><b>AI &amp; DS</b>PgD in progress</div>
+<!-- hero -->
+<header id="top" class="wrap" style="padding-top:80px;padding-bottom:72px">
+  <div class="hero">
+    <div style="display:flex;flex-direction:column;gap:28px">
+      <p style="margin:0;font-size:16px;font-weight:700;color:#f2b400">MEAL Officer · LEAD4africa · Kampala, Uganda</p>
+      <h1 style="margin:0;font-family:Unbounded,'Arial Black',sans-serif;font-weight:900;font-size:clamp(56px,8vw,112px);line-height:.95;letter-spacing:-.03em">David<br>Ekou</h1>
+      <p style="margin:0;font-size:24px;line-height:1.45;max-width:30ch">I measure what changes in young people's lives, and I build <span style="color:#f2b400;font-weight:700">AI tools</span> that help programmes learn faster.</p>
+      <p style="margin:0;color:#bfb19a;max-width:56ch">Four years of programme data across HIV clinics in Soroti and Kigezi and youth leadership work at LEAD4africa. Now studying AI and data science, and researching how African institutions can adopt it on their own terms.</p>
+      <div style="display:flex;gap:14px;flex-wrap:wrap">
+        <a class="btn" href="#data" style="background:#f2b400;color:#14100b">Explore my live dashboard</a>
+        <a class="btn" href="cv.pdf" target="_blank" rel="noopener" style="border:1.5px solid #f3ead9;color:#f3ead9">Download CV</a>
       </div>
     </div>
-    <div class="stats">
-      <div class="stat reveal"><b data-count="4" data-suffix="+">4+</b><span>years in MEAL and health programme data</span></div>
-      <div class="stat reveal"><b data-count="510">510</b><span>programme and alumni records cleaned and verified</span></div>
-      <div class="stat reveal"><b data-count="10" data-suffix="+">10+</b><span>data systems and collection tools used</span></div>
-      <div class="stat reveal"><b data-count="3">3</b><span>languages: English, Ateso, Kiswahili</span></div>
-    </div>
+    <figure style="margin:0;justify-self:center;width:100%;max-width:400px">
+      <div style="position:relative;margin-right:28px;margin-bottom:28px">
+      <div aria-hidden="true" style="position:absolute;inset:28px -28px -28px 28px;border-radius:200px 200px 20px 20px;overflow:hidden;display:flex;flex-direction:column">
+        <div style="flex:1;background:#000;border:1px solid rgba(243,234,217,.18);border-bottom:0"></div>
+        <div style="flex:1;background:#f2b400"></div>
+        <div style="flex:1;background:#d9382a"></div>
+        <div style="flex:1;background:#000;border:1px solid rgba(243,234,217,.18);border-bottom:0;border-top:0"></div>
+        <div style="flex:1;background:#f2b400"></div>
+        <div style="flex:1;background:#d9382a"></div>
+      </div>
+      <img src="photo.jpg" alt="Portrait of David Ekou smiling, wearing an orange and white shirt" style="position:relative;display:block;width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 28%;border-radius:200px 200px 20px 20px">
+      </div>
+      <figcaption style="margin-top:16px;font-size:14px;color:#bfb19a">Speaks English, Ateso and Kiswahili</figcaption>
+    </figure>
   </div>
 </header>
 
-<!-- ============ ABOUT ============ -->
-<section id="about">
-  <div class="wrap about">
-    <div class="bio reveal">
-      <span class="kicker">About me</span>
-      <h2>Evidence people can trust, from the field to the boardroom.</h2>
-      <p>I started out entering patient records in HIV clinics in Soroti and Kigezi, where a missing field could mean a missed follow-up. That taught me that <strong>data quality is a duty of care</strong>, not admin.</p>
-      <p>Today I run MEAL work at LEAD4africa: tracer studies, KAP surveys, endline evaluations and the dashboards that carry their findings to managers, boards and donors.</p>
-      <p>Alongside that, I'm studying AI and data science and building tools that make this work faster and more local, because I believe <strong>African programmes should help shape how AI is used in development</strong>.</p>
-    </div>
-    <aside class="logframe reveal" aria-label="Personal results framework">
-      <header><span>My results framework</span><span>2026</span></header>
-      <dl>
-        <div class="lf-row goal"><dt>Goal</dt><dd>Development programmes that learn from their own data</dd></div>
-        <div class="lf-row"><dt>Outcome</dt><dd>Managers, boards and donors decide with clean, disaggregated evidence</dd></div>
-        <div class="lf-row"><dt>Outputs</dt><dd>Tracer studies, KAP analyses, evaluations, dashboards, learning briefs</dd></div>
-        <div class="lf-row"><dt>Means of verification</dt><dd>Kobo · ODK · DHIS2 · UgandaEMR · Salesforce · R · Python · Power BI</dd></div>
-        <div class="lf-row"><dt>Assumption</dt><dd>AI is adopted responsibly, locally and with communities in view</dd></div>
-      </dl>
-    </aside>
-  </div>
-</section>
-
-<!-- ============ LIVE DASHBOARD ============ -->
-<section id="dashboard">
-  <div class="wrap">
-    <div class="head reveal">
-      <div><span class="kicker">Try it yourself</span><h2>A live KAP dashboard</h2></div>
-      <p>This is how I present Knowledge, Attitudes and Practices results. Filter by sex and site, and the scores, gains and key finding update instantly.</p>
-    </div>
-
-    <div class="dash reveal">
-      <div class="dash-top">
-        <div><h3>Youth programme KAP survey: baseline vs endline</h3><small>Share of respondents meeting the standard in each domain</small></div>
-        <span class="demo-tag">Demo data · not real results</span>
-      </div>
-
-      <div class="filters" role="group" aria-label="Dashboard filters">
-        <div class="filter"><span>Sex</span>
-          <div class="seg" data-filter="sex">
-            <button type="button" id="f-sex-all" data-v="all" aria-pressed="true">All</button>
-            <button type="button" id="f-sex-f" data-v="F" aria-pressed="false">Female</button>
-            <button type="button" id="f-sex-m" data-v="M" aria-pressed="false">Male</button>
-          </div>
-        </div>
-        <div class="filter"><span>Site</span>
-          <div class="seg" data-filter="site">
-            <button type="button" id="f-site-all" data-v="all" aria-pressed="true">All</button>
-            <button type="button" id="f-site-a" data-v="A" aria-pressed="false">Site A</button>
-            <button type="button" id="f-site-b" data-v="B" aria-pressed="false">Site B</button>
-            <button type="button" id="f-site-c" data-v="C" aria-pressed="false">Site C</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="kpis">
-        <div class="kpi"><span>Respondents (endline)</span><b id="k-n">491</b></div>
-        <div class="kpi"><span>Female share</span><b id="k-f">51%</b></div>
-        <div class="kpi"><span>Average gain across domains</span><b id="k-g" class="up">+23 pp</b></div>
-      </div>
-
-      <div class="chart-head">
-        <div class="legend"><span><i style="background:var(--ochre)"></i>Baseline</span><span><i style="background:var(--teal)"></i>Endline</span></div>
-        <button type="button" class="linkbtn" id="toggle-table" aria-expanded="false">Show as table</button>
-      </div>
-      <div class="chart" id="chart"></div>
-      <div class="axis" id="axis" aria-hidden="true"><span></span><div><span style="left:0">0%</span><span style="left:25%">25%</span><span style="left:50%">50%</span><span style="left:75%">75%</span><span style="left:100%">100%</span></div></div>
-      <div id="table-view" hidden></div>
-      <p class="insight" id="insight" aria-live="polite"></p>
-      <p class="dash-note">Built in plain JavaScript for this site. In my day-to-day work I build the same views in R Shiny and Power BI on live programme data.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ============ MEAL CASE STUDIES ============ -->
-<section id="meal">
-  <div class="wrap">
-    <div class="head reveal">
-      <div><span class="kicker">Monitoring, evaluation &amp; learning</span><h2>MEAL case studies</h2></div>
-      <p>Selected assignments from youth development and health programmes: the question, the method, my role and what the evidence changed.</p>
-    </div>
-    <div class="cases">
-      <article class="case reveal" style="--c:var(--ochre)">
-        <span class="tag">Tracer study</span>
-        <h3>Tracking alumni outcomes years after the programme</h3>
-        <dl>
-          <div><dt>Question</dt><dd>Where are former participants now in education, work, enterprise and leadership?</dd></div>
-          <div><dt>Method</dt><dd>Alumni tracer survey with a control-group comparison, structured by the programme's four pillars: Leadership, Entrepreneurship, Academics and Discipleship.</dd></div>
-          <div><dt>My role</dt><dd>Data quality assurance in Salesforce, sex-disaggregated analysis, donor-facing dashboard.</dd></div>
-          <div><dt>Result</dt><dd>A reporting-ready alumni dataset and outcome evidence used in board, QBR and donor reporting.</dd></div>
-        </dl>
-      </article>
-      <article class="case reveal" style="--c:var(--teal)">
-        <span class="tag">KAP survey</span>
-        <h3>Knowledge, attitudes &amp; practices in a youth sport programme</h3>
-        <dl>
-          <div><dt>Question</dt><dd>Did participants' knowledge, attitudes and practices shift, and did change differ for young women and men?</dd></div>
-          <div><dt>Method</dt><dd>Quantitative KAP survey plus qualitative data collection, gender-disaggregated throughout.</dd></div>
-          <div><dt>My role</dt><dd>Analysis in R, interactive Shiny and Power BI dashboards, annual report inputs.</dd></div>
-          <div><dt>Result</dt><dd>Findings the team could explore by sex and site, feeding the programme's annual report.</dd></div>
-        </dl>
-      </article>
-      <article class="case reveal" style="--c:var(--ink)">
-        <span class="tag">Endline evaluation</span>
-        <h3>Senior Six endline: what changed for students</h3>
-        <dl>
-          <div><dt>Question</dt><dd>What changes in leadership, values and character did students experience by the end of school?</dd></div>
-          <div><dt>Method</dt><dd>Mixed methods: focus group discussions and key informant interviews alongside survey data.</dd></div>
-          <div><dt>My role</dt><dd>Conducted focus groups and key informant interviews, synthesised findings and drafted donor reporting.</dd></div>
-          <div><dt>Result</dt><dd>Donor-ready evidence on outcomes that are hard to measure with numbers alone.</dd></div>
-        </dl>
-      </article>
-    </div>
-    <p class="note">Programme and donor details are anonymised. No beneficiary data appears on this site.</p>
-  </div>
-</section>
-
-<!-- ============ PROJECTS ============ -->
-<section id="projects">
-  <div class="wrap">
-    <div class="head reveal">
-      <div><span class="kicker">AI, data science &amp; ML</span><h2>Things I'm building</h2></div>
-      <p>Where MEAL meets AI: tools and research on problems I see in Ugandan programmes, classrooms and farms.</p>
-    </div>
-    <div class="projects">
-      <article class="proj feature reveal">
-        <span class="status live">Live app</span>
-        <h3>Life Expectancy Explorer</h3>
-        <p>A machine-learning model that predicts country life expectancy from WHO health, economic and schooling indicators, deployed as an interactive Streamlit app. The main model deliberately leaves out mortality indicators; a second version that includes them shows how target leakage inflates accuracy. It's the same discipline I apply when judging whether an indicator really measures an outcome.</p>
-        <ul class="chips"><li>Python</li><li>Machine learning</li><li>Streamlit</li><li>WHO / Kaggle data</li><li>Colab notebooks</li></ul>
-        <div class="links">
-          <a href="https://life-expectancy-explorer.streamlit.app" target="_blank" rel="noopener">Open the app</a>
-          <a href="https://github.com/ekoudavid/life-expectancy-prediction" target="_blank" rel="noopener">View the code</a>
-        </div>
-      </article>
-      <article class="proj reveal">
-        <span class="status build">In development</span>
-        <h3>Kujenga: mentorship for MEAL &amp; data careers</h3>
-        <p>A web platform that connects early-career MEAL and data professionals across Africa with mentors who have walked the path. <em>Kujenga</em> is Kiswahili for "to build".</p>
-        <ul class="chips"><li>Next.js</li><li>Supabase</li><li>Vercel</li></ul>
-      </article>
-      <article class="proj reveal">
-        <span class="status build">In development</span>
-        <h3>Offline coffee advisory assistant</h3>
-        <p>A retrieval-augmented generation (RAG) assistant that answers coffee farmers' questions from trusted agronomy guides, designed for the poor connectivity of rural Uganda.</p>
-        <ul class="chips"><li>Python</li><li>RAG</li><li>LLMs</li><li>Embeddings</li></ul>
-      </article>
-      <article class="proj reveal">
-        <span class="status research">Research · 2026–27</span>
-        <h3>Generative AI governance in Ugandan universities</h3>
-        <p>A framework for adopting generative AI in Ugandan universities while protecting academic integrity: policy, assessment design and staff readiness.</p>
-        <ul class="chips"><li>AI governance</li><li>Policy</li><li>Mixed methods</li></ul>
-      </article>
-      <article class="proj reveal">
-        <span class="status research">Research · 2026</span>
-        <h3>AI readiness &amp; data protection in Ugandan organisations</h3>
-        <p>Group study on how NGOs and other organisations in Uganda are adopting AI, how ready their governance is, and how well they comply with data protection law.</p>
-        <ul class="chips"><li>Survey research</li><li>Data protection</li><li>NGOs</li></ul>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- ============ EXPERIENCE ============ -->
-<section id="experience">
-  <div class="wrap">
-    <div class="head reveal">
-      <div><span class="kicker">Experience</span><h2>Where I've worked</h2></div>
-      <p>From paper registers in health facilities to Salesforce and donor dashboards.</p>
-    </div>
-    <div class="tl-wrap" id="timeline">
-      <span class="prog" aria-hidden="true"></span>
-      <ol class="timeline">
-        <li class="reveal"><span class="when">Jul 2026 – now</span><div><h3>MEAL Officer</h3><p class="org">LEAD4africa · Impact, Communications &amp; Technology</p><ul>
-          <li>Plan and run MEAL activities that track programme performance against the Strategic Plan.</li>
-          <li>Support alumni tracer studies on education, employment, entrepreneurship and leadership outcomes.</li>
-          <li>Prepare monthly performance evidence for management, quarterly business reviews, the board and donors.</li></ul></div></li>
-        <li class="reveal"><span class="when">Feb 2025 – Jun 2026</span><div><h3>Data Associate</h3><p class="org">LEAD4africa · Strategy &amp; Programme Impact</p><ul>
-          <li>Reviewed and updated 510 programme, alumni, employment and business records in Salesforce.</li>
-          <li>Supported baseline, endline, tracer, control group and recruitment analyses.</li>
-          <li>Ran data verification, user acceptance testing and import readiness for the LDP 2.0 Salesforce upgrade.</li></ul></div></li>
-        <li class="reveal"><span class="when">Nov 2023 – Feb 2025</span><div><h3>Data Clerk</h3><p class="org">Joint Clinical Research Centre · USAID LPHS Kigezi &amp; Lango</p><ul>
-          <li>Maintained UgandaEMR, DHIS2, HIBRID and KP/PP Tracker data from paper clinical records.</li>
-          <li>Compiled and submitted 033B, weekly SURGE, HMIS 105 monthly and 106 quarterly reports.</li>
-          <li>Analysed data for facility quality-improvement teams and programme reviews.</li></ul></div></li>
-        <li class="reveal"><span class="when">Feb 2023 – Sep 2023</span><div><h3>Data Entry Clerk</h3><p class="org">TASO Soroti Centre of Excellence</p><ul>
-          <li>Entered and checked data in UgandaEMR, KP Tracker and TBL-ECBSS.</li>
-          <li>Supported ACASI interviewing to identify key and priority populations.</li>
-          <li>Produced weekly performance review presentations.</li></ul></div></li>
-      </ol>
-    </div>
-  </div>
-</section>
-
-<!-- ============ EDUCATION & TOOLS ============ -->
-<section id="education">
-  <div class="wrap">
-    <div class="head reveal">
-      <div><span class="kicker">Education &amp; toolkit</span><h2>What I've learned, what I use</h2></div>
-      <p>Economics and statistics first, then evaluation, then AI.</p>
-    </div>
-    <div class="edu">
-      <article class="reveal"><span class="yr">2026–27</span><div><h3>Postgraduate Diploma in Artificial Intelligence &amp; Data Science</h3><p>Uganda Technology and Management University (UTAMU)</p><span class="now">In progress</span></div></article>
-      <article class="reveal"><span class="yr">2025–26</span><div><h3>Postgraduate Diploma in Monitoring &amp; Evaluation</h3><p>Uganda Management Institute (UMI)</p></div></article>
-      <article class="reveal"><span class="yr">2025</span><div><h3>Certificate in Data Science &amp; Machine Learning</h3><p>Refactory Uganda · 96 hours</p></div></article>
-      <article class="reveal"><span class="yr">2018–22</span><div><h3>Bachelor's Degree in Economics &amp; Statistics</h3><p>Kyambogo University</p></div></article>
-    </div>
-    <div class="toolkit reveal">
-      <div><h3>Collect</h3><ul class="chips"><li>KoboToolbox</li><li>ODK</li><li>Jotform</li><li>Google Forms</li><li>MS Forms</li><li>FGDs &amp; KIIs</li></ul></div>
-      <div><h3>Manage</h3><ul class="chips"><li>Salesforce</li><li>DHIS2</li><li>UgandaEMR</li><li>HIBRID</li><li>KP/PP Tracker</li><li>MS Access</li></ul></div>
-      <div><h3>Analyse &amp; model</h3><ul class="chips"><li>R</li><li>Python</li><li>Advanced Excel</li><li>Machine learning</li><li>RAG &amp; LLMs</li></ul></div>
-      <div><h3>Communicate</h3><ul class="chips"><li>Power BI</li><li>R Shiny</li><li>Streamlit</li><li>Chart.js</li><li>Donor reports</li><li>Learning briefs</li></ul></div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ WRITING ============ -->
-<section id="writing">
-  <div class="wrap">
-    <div class="head reveal">
-      <div><span class="kicker">Building in public</span><h2>Writing &amp; posts</h2></div>
-      <p>Short explainers on data, MEAL and AI, for people who'd rather see it than read a manual.</p>
-    </div>
-    <div class="posts">
-      <a class="post reveal" href="https://www.linkedin.com/in/ekoudavid" target="_blank" rel="noopener">
-        <span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="#0b5f53"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4V21H3zM9.5 9.5h3.8v1.6h.1c.5-1 1.8-2 3.8-2 4 0 4.8 2.6 4.8 6V21h-4v-5.2c0-1.3 0-2.9-1.8-2.9s-2 1.4-2 2.8V21h-4z"/></svg></span>
-        <div><b>LinkedIn</b><span>Posts and explainer videos on MEAL practice and data careers.</span></div>
-      </a>
-      <a class="post reveal" href="https://x.com/giantkila14" target="_blank" rel="noopener">
-        <span class="ic" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="#0b5f53"><path d="M18.2 2.3h3.4l-7.4 8.4 8.7 11.5h-6.8l-5.3-7-6.1 7H1.3l7.9-9L.9 2.3h7l4.8 6.4zm-1.2 17.9h1.9L7 4.2H5z"/></svg></span>
-        <div><b>X · @giantkila14</b><span>Quick takes and animated explainers on AI, ML and data analysis.</span></div>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- ============ CONTACT ============ -->
-<div class="contact" id="contact">
-  <div class="wrap grid">
-    <div>
-      <span class="kicker">Contact</span>
-      <h2>Need evidence your team can act on?</h2>
-      <p class="lang">I'm open to MEAL, M&amp;E, information management and data roles in Uganda, Kenya and Rwanda, and to remote work worldwide. I work in English, Ateso and Kiswahili.</p>
-      <div class="cta">
-        <a class="btn solid" href="cv.pdf" target="_blank" rel="noopener">Download CV</a>
-        <button type="button" class="btn" id="copy-email">Copy email</button><span class="copy-msg" id="copy-msg" aria-live="polite"></span>
-      </div>
-    </div>
-    <ul>
-      <li><a href="mailto:ekoudavid98@gmail.com">Email <small>ekoudavid98@gmail.com</small></a></li>
-      <li><a href="https://www.linkedin.com/in/ekoudavid" target="_blank" rel="noopener">LinkedIn <small>in/ekoudavid</small></a></li>
-      <li><a href="https://github.com/ekoudavid" target="_blank" rel="noopener">GitHub <small>ekoudavid</small></a></li>
-      <li><a href="https://x.com/giantkila14" target="_blank" rel="noopener">X <small>@giantkila14</small></a></li>
-    </ul>
+<!-- facts -->
+<div class="wrap">
+  <div class="facts" style="border-top:1px solid rgba(243,234,217,.14);border-bottom:1px solid rgba(243,234,217,.14)">
+    <div><p style="margin:0;font-family:Unbounded,sans-serif;font-weight:700;font-size:28px;color:#f2b400">510</p><p style="margin:4px 0 0;font-size:15px;color:#bfb19a">alumni and programme records verified in Salesforce</p></div>
+    <div><p style="margin:0;font-family:Unbounded,sans-serif;font-weight:700;font-size:28px;color:#f2b400">HMIS 105 · 106</p><p style="margin:4px 0 0;font-size:15px;color:#bfb19a">monthly and quarterly health reports compiled and submitted</p></div>
+    <div><p style="margin:0;font-family:Unbounded,sans-serif;font-weight:700;font-size:28px;color:#f2b400">UG · KE · RW</p><p style="margin:4px 0 0;font-size:15px;color:#bfb19a">open to roles on site, and to remote work anywhere</p></div>
   </div>
 </div>
-<footer><div class="wrap"><span>© 2026 David Ekou · Kampala, Uganda</span><span>Hand-built in HTML &amp; JavaScript · hosted on GitHub Pages</span></div></footer>
+
+<!-- live dashboard -->
+<section id="data" class="wrap" style="padding-top:112px">
+  <div style="display:flex;gap:12px;align-items:center;margin-bottom:18px"><span aria-hidden="true" style="display:flex;width:36px;height:6px"><span style="flex:1;background:#f3ead9"></span><span style="flex:1;background:#f2b400"></span><span style="flex:1;background:#d9382a"></span></span><span style="font-size:15px;font-weight:700;color:#f2b400">Read the data the way I do</span></div>
+  <h2 style="margin:0 0 16px;font-family:Unbounded,sans-serif;font-weight:700;font-size:clamp(32px,4vw,52px);line-height:1.05;letter-spacing:-.02em;max-width:18ch">Did the programme change what young people do?</h2>
+  <p style="margin:0 0 40px;color:#bfb19a;max-width:62ch">A knowledge, attitudes and practices survey, before and after a youth programme. Pick who you want to look at. The figures are made up for this demo; the way of reading them is how I work with real programme data.</p>
+
+  <div class="dashcard" style="background:#1d1811;border:1px solid rgba(243,234,217,.14);border-radius:24px;padding:36px">
+    <div style="display:flex;flex-wrap:wrap;gap:28px;align-items:center;justify-content:space-between">
+      <div style="display:flex;flex-wrap:wrap;gap:28px">
+        <div role="group" aria-label="Sex" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+          <span style="font-size:14px;color:#bfb19a">Sex</span>
+          <div class="seg" id="seg-sex" style="display:flex;gap:8px;flex-wrap:wrap">
+            
+          </div>
+        </div>
+        <div role="group" aria-label="Site" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+          <span style="font-size:14px;color:#bfb19a">Site</span>
+          <div class="seg" id="seg-site" style="display:flex;gap:8px;flex-wrap:wrap">
+            
+          </div>
+        </div>
+      </div>
+      <p style="margin:0;font-size:13px;font-weight:700;color:#14100b;background:#f3ead9;border-radius:6px;padding:4px 10px">Demo data</p>
+    </div>
+
+    <p style="margin:28px 0 8px;font-size:17px"><span id="summary"></span></p>
+    <div style="display:flex;gap:24px;flex-wrap:wrap;font-size:14px;color:#bfb19a;margin-bottom:12px">
+      <span style="display:inline-flex;align-items:center;gap:8px"><span aria-hidden="true" style="width:14px;height:14px;border-radius:50%;border:3px solid #c94435;box-sizing:border-box"></span>Baseline</span>
+      <span style="display:inline-flex;align-items:center;gap:8px"><span aria-hidden="true" style="width:14px;height:14px;border-radius:50%;background:#b98800"></span>Endline</span>
+      <span>Share of respondents meeting the standard</span>
+    </div>
+
+    <div id="rows" style="display:flex;flex-direction:column"></div>
+    <div class="drow axisrow" style="display:grid;grid-template-columns:150px minmax(0,1fr) 92px;gap:20px;font-size:12px;color:#bfb19a">
+      <span></span>
+      <div style="display:flex;justify-content:space-between"><span>0%</span><span>25%</span><span>50%</span><span>75%</span><span>100%</span></div>
+      <span style="text-align:right">change</span>
+    </div>
+
+    <div style="margin-top:32px;padding:24px 28px;border-radius:16px;background:#f2b400;color:#14100b">
+      <p style="margin:0 0 6px;font-size:14px;font-weight:700">What I would tell the programme team</p>
+      <p style="margin:0;font-size:19px;line-height:1.5"><span id="advice"></span></p>
+    </div>
+  </div>
+  <p style="margin:16px 0 0;font-size:14px;color:#bfb19a">In my day-to-day work I build these views in R Shiny and Power BI on live programme data.</p>
+</section>
+
+<!-- MEAL work -->
+<section id="meal" class="wrap" style="padding-top:112px">
+  <div style="display:flex;gap:12px;align-items:center;margin-bottom:18px"><span aria-hidden="true" style="display:flex;width:36px;height:6px"><span style="flex:1;background:#f3ead9"></span><span style="flex:1;background:#f2b400"></span><span style="flex:1;background:#d9382a"></span></span><span style="font-size:15px;font-weight:700;color:#f2b400">Monitoring, evaluation &amp; learning</span></div>
+  <h2 style="margin:0 0 40px;font-family:Unbounded,sans-serif;font-weight:700;font-size:clamp(32px,4vw,52px);line-height:1.05;letter-spacing:-.02em">Three studies, three questions</h2>
+
+  <article class="case">
+    <div><p style="margin:0 0 8px;font-size:14px;font-weight:700;color:#d9382a">Alumni tracer study</p><h3 style="margin:0;font-family:Unbounded,sans-serif;font-weight:700;font-size:24px;line-height:1.2">Where are our graduates now?</h3></div>
+    <div style="color:#bfb19a"><p style="margin:0 0 12px">A tracer survey with a control-group comparison, following former participants into education, work, enterprise and leadership. Findings are organised by the programme's four pillars: Leadership, Entrepreneurship, Academics and Discipleship.</p><p style="margin:0"><span style="color:#f3ead9;font-weight:700">My part:</span> data quality assurance in Salesforce, sex-disaggregated analysis, and the donor-facing dashboard used in board and QBR reporting.</p></div>
+  </article>
+  <article class="case">
+    <div><p style="margin:0 0 8px;font-size:14px;font-weight:700;color:#d9382a">KAP survey</p><h3 style="margin:0;font-family:Unbounded,sans-serif;font-weight:700;font-size:24px;line-height:1.2">Did change differ for young women and men?</h3></div>
+    <div style="color:#bfb19a"><p style="margin:0 0 12px">A knowledge, attitudes and practices survey in a youth sport-for-development programme, with qualitative follow-up and every result disaggregated by sex.</p><p style="margin:0"><span style="color:#f3ead9;font-weight:700">My part:</span> analysis in R, interactive Shiny and Power BI dashboards the team explores by sex and site, and inputs to the annual report.</p></div>
+  </article>
+  <article class="case" style="border-bottom:1px solid rgba(243,234,217,.14)">
+    <div><p style="margin:0 0 8px;font-size:14px;font-weight:700;color:#d9382a">Senior Six endline evaluation</p><h3 style="margin:0;font-family:Unbounded,sans-serif;font-weight:700;font-size:24px;line-height:1.2">What can't a questionnaire capture?</h3></div>
+    <div style="color:#bfb19a"><p style="margin:0 0 12px">A mixed-methods endline on leadership, values and character among students finishing school, where numbers alone miss most of the story.</p><p style="margin:0"><span style="color:#f3ead9;font-weight:700">My part:</span> focus group discussions and key informant interviews, synthesis, and donor reporting.</p></div>
+  </article>
+  <p style="margin:16px 0 0;font-size:14px;color:#bfb19a">Programme and donor details are anonymised. No beneficiary data appears on this site.</p>
+</section>
+
+<!-- AI projects -->
+<section id="ai" class="wrap" style="padding-top:112px">
+  <div style="display:flex;gap:12px;align-items:center;margin-bottom:18px"><span aria-hidden="true" style="display:flex;width:36px;height:6px"><span style="flex:1;background:#f3ead9"></span><span style="flex:1;background:#f2b400"></span><span style="flex:1;background:#d9382a"></span></span><span style="font-size:15px;font-weight:700;color:#f2b400">AI, data science &amp; machine learning</span></div>
+  <h2 style="margin:0 0 40px;font-family:Unbounded,sans-serif;font-weight:700;font-size:clamp(32px,4vw,52px);line-height:1.05;letter-spacing:-.02em">What I'm building</h2>
+
+  <article style="background:#f3ead9;color:#14100b;border-radius:24px;padding:44px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:40px" class="two">
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <p style="margin:0;font-size:14px;font-weight:700;color:#8a2a1f">Live app</p>
+      <h3 style="margin:0;font-family:Unbounded,sans-serif;font-weight:700;font-size:32px;line-height:1.1">Life Expectancy Explorer</h3>
+      <p style="margin:0;color:#4a4136">A model that predicts a country's life expectancy from WHO health, economic and schooling indicators, deployed as a Streamlit app anyone can use.</p>
+      <div style="display:flex;gap:24px;flex-wrap:wrap;margin-top:auto">
+        <a target="_blank" rel="noopener" href="https://life-expectancy-explorer.streamlit.app" style="color:#14100b;font-weight:700">Open the app</a>
+        <a target="_blank" rel="noopener" href="https://github.com/ekoudavid/life-expectancy-prediction" style="color:#14100b;font-weight:700">Read the code</a>
+      </div>
+    </div>
+    <div style="border-left:2px solid #14100b;padding-left:32px;display:flex;flex-direction:column;justify-content:center;gap:12px">
+      <p style="margin:0;font-family:Unbounded,sans-serif;font-weight:700;font-size:20px;line-height:1.3">Why the main model ignores mortality data</p>
+      <p style="margin:0;color:#4a4136">Adult and infant mortality almost spell out life expectancy, so a model fed them looks brilliant and teaches nothing. I kept them out, and built a second model with them in to show the gap. It's the same test I apply to any indicator: does it measure the outcome, or just repeat it?</p>
+    </div>
+  </article>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:0;margin-top:24px">
+    <article style="padding:28px 28px 28px 0;border-top:1px solid rgba(243,234,217,.14)">
+      <p style="margin:0 0 8px;font-size:14px;font-weight:700;color:#f2b400">Building</p>
+      <h3 style="margin:0 0 10px;font-family:Unbounded,sans-serif;font-weight:700;font-size:20px;line-height:1.25">Kujenga</h3>
+      <p style="margin:0;color:#bfb19a;font-size:16px">A mentorship platform pairing early-career MEAL and data professionals across Africa with people who have walked the path. Kujenga is Kiswahili for "to build". Next.js and Supabase.</p>
+    </article>
+    <article style="padding:28px 28px 28px 0;border-top:1px solid rgba(243,234,217,.14)">
+      <p style="margin:0 0 8px;font-size:14px;font-weight:700;color:#f2b400">Building</p>
+      <h3 style="margin:0 0 10px;font-family:Unbounded,sans-serif;font-weight:700;font-size:20px;line-height:1.25">Offline coffee adviser</h3>
+      <p style="margin:0;color:#bfb19a;font-size:16px">A retrieval-augmented assistant that answers coffee farmers' questions from trusted agronomy guides, designed for patchy rural connectivity.</p>
+    </article>
+    <article style="padding:28px 28px 28px 0;border-top:1px solid rgba(243,234,217,.14)">
+      <p style="margin:0 0 8px;font-size:14px;font-weight:700;color:#f2b400">Researching</p>
+      <h3 style="margin:0 0 10px;font-family:Unbounded,sans-serif;font-weight:700;font-size:20px;line-height:1.25">AI in Ugandan universities</h3>
+      <p style="margin:0;color:#bfb19a;font-size:16px">A governance and academic-integrity framework for generative AI, plus a study of AI readiness and data protection in Ugandan organisations.</p>
+    </article>
+  </div>
+</section>
+
+<!-- experience + education -->
+<section id="experience" class="wrap" style="padding-top:112px">
+  <div style="display:flex;gap:12px;align-items:center;margin-bottom:18px"><span aria-hidden="true" style="display:flex;width:36px;height:6px"><span style="flex:1;background:#f3ead9"></span><span style="flex:1;background:#f2b400"></span><span style="flex:1;background:#d9382a"></span></span><span style="font-size:15px;font-weight:700;color:#f2b400">Experience</span></div>
+  <h2 style="margin:0 0 32px;font-family:Unbounded,sans-serif;font-weight:700;font-size:clamp(32px,4vw,52px);line-height:1.05;letter-spacing:-.02em">From clinic registers to boardrooms</h2>
+
+  <div class="job"><p style="margin:0;font-size:15px;color:#bfb19a">Jul 2026 – now</p><div><h3 style="margin:0;font-size:21px">MEAL Officer · <span style="color:#f2b400">LEAD4africa</span></h3><p style="margin:6px 0 0;color:#bfb19a">Runs monitoring, tracer studies and monthly performance evidence for management, the board and donors.</p></div></div>
+  <div class="job"><p style="margin:0;font-size:15px;color:#bfb19a">Feb 2025 – Jun 2026</p><div><h3 style="margin:0;font-size:21px">Data Associate · <span style="color:#f2b400">LEAD4africa</span></h3><p style="margin:6px 0 0;color:#bfb19a">Verified 510 records in Salesforce, supported baseline, endline and tracer analyses, and tested the LDP 2.0 data migration.</p></div></div>
+  <div class="job"><p style="margin:0;font-size:15px;color:#bfb19a">Nov 2023 – Feb 2025</p><div><h3 style="margin:0;font-size:21px">Data Clerk · <span style="color:#f2b400">Joint Clinical Research Centre</span></h3><p style="margin:6px 0 0;color:#bfb19a">USAID LPHS Kigezi &amp; Lango. Kept UgandaEMR, DHIS2 and HIBRID data current and submitted 033B, SURGE, HMIS 105 and 106 reports.</p></div></div>
+  <div class="job" style="border-bottom:1px solid rgba(243,234,217,.14)"><p style="margin:0;font-size:15px;color:#bfb19a">Feb 2023 – Sep 2023</p><div><h3 style="margin:0;font-size:21px">Data Entry Clerk · <span style="color:#f2b400">TASO Soroti</span></h3><p style="margin:6px 0 0;color:#bfb19a">Entered and checked clinical data, supported ACASI interviewing of key and priority populations.</p></div></div>
+
+  <div class="two" style="margin-top:72px">
+    <div>
+      <h3 style="margin:0 0 20px;font-family:Unbounded,sans-serif;font-weight:700;font-size:24px">Education</h3>
+      <p style="margin:0 0 14px"><strong>PgD Artificial Intelligence &amp; Data Science</strong><br><span style="color:#bfb19a;font-size:16px">Uganda Technology and Management University · 2026–27, in progress</span></p>
+      <p style="margin:0 0 14px"><strong>PgD Monitoring &amp; Evaluation</strong><br><span style="color:#bfb19a;font-size:16px">Uganda Management Institute · 2025–26</span></p>
+      <p style="margin:0 0 14px"><strong>Certificate in Data Science &amp; Machine Learning</strong><br><span style="color:#bfb19a;font-size:16px">Refactory Uganda · 2025, 96 hours</span></p>
+      <p style="margin:0"><strong>BA Economics &amp; Statistics</strong><br><span style="color:#bfb19a;font-size:16px">Kyambogo University · 2018–22</span></p>
+    </div>
+    <div>
+      <h3 style="margin:0 0 20px;font-family:Unbounded,sans-serif;font-weight:700;font-size:24px">Tools I use</h3>
+      <p style="margin:0 0 14px"><strong>Collect</strong><br><span style="color:#bfb19a;font-size:16px">KoboToolbox, ODK, Jotform, Google and Microsoft Forms, focus groups and interviews</span></p>
+      <p style="margin:0 0 14px"><strong>Manage</strong><br><span style="color:#bfb19a;font-size:16px">Salesforce, DHIS2, UgandaEMR, HIBRID, KP/PP Tracker, Access</span></p>
+      <p style="margin:0 0 14px"><strong>Analyse</strong><br><span style="color:#bfb19a;font-size:16px">R, Python, advanced Excel, machine learning, RAG and LLMs</span></p>
+      <p style="margin:0"><strong>Report</strong><br><span style="color:#bfb19a;font-size:16px">Power BI, R Shiny, Streamlit, donor reports and learning briefs</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- contact -->
+<section id="contact" style="margin-top:112px;background:#f2b400;color:#14100b">
+  <div class="wrap two" style="padding-top:88px;padding-bottom:88px;align-items:end">
+    <div>
+      <h2 style="margin:0 0 20px;font-family:Unbounded,sans-serif;font-weight:900;font-size:clamp(36px,5vw,64px);line-height:1;letter-spacing:-.02em">Let's talk about your evidence.</h2>
+      <p style="margin:0;font-size:18px;max-width:46ch">Open to MEAL, M&amp;E, information management and data roles in Uganda, Kenya and Rwanda, and to remote work. I also write about data and AI on LinkedIn and X.</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <a href="mailto:ekoudavid98@gmail.com" style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:18px 22px;border-radius:14px;background:#14100b;color:#f3ead9;text-decoration:none;font-weight:700">Email<span style="font-weight:400;color:#bfb19a">ekoudavid98@gmail.com</span></a>
+      <a target="_blank" rel="noopener" href="https://www.linkedin.com/in/ekoudavid" style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:18px 22px;border-radius:14px;background:#14100b;color:#f3ead9;text-decoration:none;font-weight:700">LinkedIn<span style="font-weight:400;color:#bfb19a">in/ekoudavid</span></a>
+      <a target="_blank" rel="noopener" href="https://github.com/ekoudavid" style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:18px 22px;border-radius:14px;background:#14100b;color:#f3ead9;text-decoration:none;font-weight:700">GitHub<span style="font-weight:400;color:#bfb19a">ekoudavid</span></a>
+      <a target="_blank" rel="noopener" href="https://x.com/giantkila14" style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:18px 22px;border-radius:14px;background:#14100b;color:#f3ead9;text-decoration:none;font-weight:700">X<span style="font-weight:400;color:#bfb19a">@giantkila14</span></a>
+    </div>
+  </div>
+</section>
+<div class="band thin"></div>
+<footer class="wrap" style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-top:24px;padding-bottom:40px;font-size:14px;color:#bfb19a">
+  <span>© 2026 David Ekou · Kampala, Uganda</span>
+  <a href="cv.pdf" target="_blank" rel="noopener" style="color:#bfb19a">Download CV</a>
+</footer>
+</div>
 
 <script>
 (function(){
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  document.documentElement.classList.add('js');
-
-  /* nav state + timeline progress */
-  const bar=document.querySelector('.bar'), links=[...document.querySelectorAll('.nav a[href^="#"]:not(.cta-mini)')];
-  const secs=links.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);
-  const tl=document.getElementById('timeline'), prog=tl.querySelector('.prog');
-  function onScroll(){
-    bar.classList.toggle('scrolled',scrollY>10);
-    let cur=null; secs.forEach(s=>{ if(s.getBoundingClientRect().top<160) cur=s.id; });
-    links.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+cur));
-    const r=tl.getBoundingClientRect();
-    prog.style.height=Math.max(0,Math.min(r.height-56,innerHeight*0.6-r.top))+'px';
-  }
-  addEventListener('scroll',onScroll,{passive:true}); onScroll();
-
-  /* reveal on scroll; anything on screen at load is shown straight away */
-  const items=[...document.querySelectorAll('.reveal')];
-  items.forEach(el=>{ if(el.getBoundingClientRect().top<innerHeight) el.classList.add('in'); });
-  if('IntersectionObserver' in window){
-    const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} }),{rootMargin:'0px 0px -8% 0px'});
-    items.forEach(el=>{ if(!el.classList.contains('in')) io.observe(el); });
-  } else items.forEach(el=>el.classList.add('in'));
-
-  /* counters */
-  function countUp(el,from,to,suffix,fmt){
-    if(reduce){ el.textContent=fmt(to)+suffix; return; }
-    const t0=performance.now(), d=900;
-    (function step(t){ const p=Math.min(1,(t-t0)/d), e=1-Math.pow(1-p,3); el.textContent=fmt(from+(to-from)*e)+suffix; if(p<1) requestAnimationFrame(step); })(t0);
-  }
-  const cio=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ const el=e.target; countUp(el,0,+el.dataset.count,el.dataset.suffix||'',v=>Math.round(v)); cio.unobserve(el);} }),{threshold:.6});
-  document.querySelectorAll('[data-count]').forEach(c=>cio.observe(c));
-
-  /* typing rotator */
-  const words=["donor-ready dashboards","KAP survey analyses","alumni tracer studies","data quality systems","machine-learning models","AI assistants for local problems"];
-  const typed=document.getElementById('typed');
-  if(!reduce){
-    let wi=0, ci=words[0].length, del=true;
-    setTimeout(function tick(){
-      if(del){ ci--; typed.textContent=words[wi].slice(0,ci); if(ci===0){ del=false; wi=(wi+1)%words.length; } setTimeout(tick,30); }
-      else { ci++; typed.textContent=words[wi].slice(0,ci); if(ci===words[wi].length){ del=true; setTimeout(tick,2000); } else setTimeout(tick,60); }
-    },2200);
-  }
-
-  /* copy email */
-  document.getElementById('copy-email').addEventListener('click',async()=>{
-    const msg=document.getElementById('copy-msg');
-    try{ await navigator.clipboard.writeText('ekoudavid98@gmail.com'); msg.textContent='Copied!'; }
-    catch(e){ msg.textContent='ekoudavid98@gmail.com'; }
-    setTimeout(()=>msg.textContent='',3000);
-  });
-
-  /* ---------- KAP demo dashboard (fictional data) ---------- */
-  // n = endline respondents; [baseline, endline] = % meeting the standard
-  const DATA=[
-    {site:"A",sex:"F",n:84, K:[41,72],A:[48,69],P:[29,55]},
-    {site:"A",sex:"M",n:76, K:[46,70],A:[52,66],P:[35,54]},
-    {site:"B",sex:"F",n:102,K:[38,74],A:[44,71],P:[24,61]},
-    {site:"B",sex:"M",n:95, K:[44,69],A:[50,64],P:[33,52]},
-    {site:"C",sex:"F",n:63, K:[35,58],A:[42,57],P:[22,38]},
-    {site:"C",sex:"M",n:71, K:[40,61],A:[47,59],P:[30,43]}
+  var DATA=[
+    {site:'A',sex:'F',n:84, K:[41,72],A:[48,69],P:[29,55]},
+    {site:'A',sex:'M',n:76, K:[46,70],A:[52,66],P:[35,54]},
+    {site:'B',sex:'F',n:102,K:[38,74],A:[44,71],P:[24,61]},
+    {site:'B',sex:'M',n:95, K:[44,69],A:[50,64],P:[33,52]},
+    {site:'C',sex:'F',n:63, K:[35,58],A:[42,57],P:[22,38]},
+    {site:'C',sex:'M',n:71, K:[40,61],A:[47,59],P:[30,43]}
   ];
-  const DOMS=[["K","Knowledge","what they know"],["A","Attitudes","what they believe"],["P","Practices","what they do"]];
-  const state={sex:"all",site:"all"};
-  const chart=document.getElementById('chart');
-  const tip=document.createElement('div'); tip.className='tip'; tip.setAttribute('role','tooltip');
-  DOMS.forEach(([k,label,sub])=>{
-    const row=document.createElement('div'); row.className='dom';
-    row.innerHTML=`<div class="name">${label}<small>${sub}</small></div>
-      <div class="bars">
-        <div class="bar-row base" data-k="${k}" data-p="Baseline"><div class="fill" style="background:var(--ochre);width:0"></div><span class="val" style="left:0"></span></div>
-        <div class="bar-row end" data-k="${k}" data-p="Endline"><div class="fill" style="background:var(--teal);width:0"></div><span class="val" style="left:0"></span></div>
-      </div>`;
-    chart.appendChild(row);
+  var DOMS=[['K','Knowledge','what they know'],['A','Attitudes','what they believe'],['P','Practices','what they do']];
+  var s={sex:'all',site:'all'};
+  var OPTS={sex:[['all','Everyone'],['F','Young women'],['M','Young men']],site:[['all','All sites'],['A','Site A'],['B','Site B'],['C','Site C']]};
+  ['sex','site'].forEach(function(key){
+    var box=document.getElementById('seg-'+key);
+    OPTS[key].forEach(function(o){
+      var b=document.createElement('button'); b.type='button'; b.textContent=o[1]; b.id='f-'+key+'-'+o[0];
+      b.setAttribute('aria-pressed',s[key]===o[0]?'true':'false');
+      b.addEventListener('click',function(){ s[key]=o[0]; box.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false');}); render(); });
+      box.appendChild(b);
+    });
   });
-  chart.appendChild(tip);
-
-  let current=null;
-  function compute(){
-    const rows=DATA.filter(d=>(state.sex==="all"||d.sex===state.sex)&&(state.site==="all"||d.site===state.site));
-    const N=rows.reduce((s,d)=>s+d.n,0), F=rows.filter(d=>d.sex==="F").reduce((s,d)=>s+d.n,0);
-    const out={N,F:N?F/N*100:0};
-    DOMS.forEach(([k])=>{ out[k]=[0,1].map(i=>rows.reduce((s,d)=>s+d[k][i]*d.n,0)/N); });
-    out.avg=DOMS.reduce((s,[k])=>s+out[k][1]-out[k][0],0)/3;
-    return out;
-  }
-  function who(){
-    const s=state.sex==="all"?"all respondents":state.sex==="F"?"female respondents":"male respondents";
-    return s+(state.site==="all"?" across all sites":" in Site "+state.site);
-  }
+  var rowsEl=document.getElementById('rows');
+  DOMS.forEach(function(dm){ var r={label:dm[1],sub:dm[2],b:0,e:0,span:0,bt:'',et:'',gain:'',aria:''}; rowsEl.insertAdjacentHTML('beforeend',`<div class="drow" style="display:grid;grid-template-columns:150px minmax(0,1fr) 92px;gap:20px;align-items:center;padding:20px 0;border-top:1px solid rgba(243,234,217,.1)">
+          <div><p style="margin:0;font-weight:700">${r.label}</p><p style="margin:0;font-size:14px;color:#bfb19a">${r.sub}</p></div>
+          <div role="img" aria-label="${r.aria}" style="position:relative;height:44px;background:linear-gradient(90deg,rgba(243,234,217,.1) 1px,transparent 1px) 0 0/25% 100%">
+            <div class="link" style="left:${r.b}%;width:${r.span}%"></div>
+            <div class="dot" style="left:${r.b}%;border:3px solid #c94435;background:#1d1811;box-sizing:border-box"></div>
+            <div class="dot" style="left:${r.e}%;background:#b98800;box-shadow:0 0 0 3px #1d1811"></div>
+            <span style="position:absolute;top:-4px;left:${r.b}%;transform:translateX(-50%);font-size:13px;color:#bfb19a;transition:left .6s">${r.bt}</span>
+            <span style="position:absolute;bottom:-6px;left:${r.e}%;transform:translateX(-50%);font-size:13px;font-weight:700;transition:left .6s">${r.et}</span>
+          </div>
+          <p style="margin:0;text-align:right;font-family:Unbounded,sans-serif;font-weight:700;font-size:20px;color:#f2b400">${r.gain}</p>
+        </div>`); });
   function render(){
-    const prev=current, c=compute(); current=c;
-    requestAnimationFrame(()=>DOMS.forEach(([k])=>{
-      chart.querySelectorAll(`.bar-row[data-k="${k}"]`).forEach((r,i)=>{
-        const v=c[k][i];
-        r.querySelector('.fill').style.width=v+'%';
-        const val=r.querySelector('.val');
-        val.style.left=v+'%';
-        val.textContent=Math.round(v)+'%'+(i===1?`  +${Math.round(c[k][1]-c[k][0])} pp`:'');
-      });
-    }));
-    const p=prev||{N:0,F:0,avg:0};
-    countUp(document.getElementById('k-n'),p.N,c.N,'',v=>Math.round(v).toLocaleString());
-    countUp(document.getElementById('k-f'),p.F,c.F,'%',v=>Math.round(v));
-    countUp(document.getElementById('k-g'),p.avg,c.avg,' pp',v=>'+'+Math.round(v));
-    const g=DOMS.map(([k,l])=>({l,g:c[k][1]-c[k][0],e:c[k][1]}));
-    const best=g.slice().sort((a,b)=>b.g-a.g)[0], low=g.slice().sort((a,b)=>a.e-b.e)[0];
-    document.getElementById('insight').textContent=`For ${who()}, ${best.l.toLowerCase()} improved most (+${Math.round(best.g)} percentage points). ${low.l} is still the lowest-scoring domain at ${Math.round(low.e)}% by endline, so that is where I would focus the next programme cycle.`;
-    document.getElementById('table-view').innerHTML=`<table class="data"><caption>KAP scores for ${who()} (n = ${c.N})</caption>
-      <thead><tr><th>Domain</th><th>Baseline</th><th>Endline</th><th>Change</th></tr></thead><tbody>${
-      DOMS.map(([k,l])=>`<tr><td>${l}</td><td>${Math.round(c[k][0])}%</td><td>${Math.round(c[k][1])}%</td><td>+${Math.round(c[k][1]-c[k][0])} pp</td></tr>`).join('')}</tbody></table>`;
+    var rows=DATA.filter(function(d){return (s.sex==='all'||d.sex===s.sex)&&(s.site==='all'||d.site===s.site);});
+    var N=rows.reduce(function(a,d){return a+d.n;},0), F=rows.filter(function(d){return d.sex==='F';}).reduce(function(a,d){return a+d.n;},0);
+    var avg=function(k,i){return rows.reduce(function(a,d){return a+d[k][i]*d.n;},0)/N;};
+    var out=DOMS.map(function(dm){var b=Math.round(avg(dm[0],0)),e=Math.round(avg(dm[0],1));return {label:dm[1],b:b,e:e,span:e-b};});
+    [].forEach.call(rowsEl.children,function(row,i){
+      var r=out[i], track=row.querySelector('[role="img"]');
+      track.setAttribute('aria-label',r.label+': '+r.b+'% at baseline, '+r.e+'% at endline');
+      var kids=track.children;
+      kids[0].style.left=r.b+'%'; kids[0].style.width=r.span+'%';
+      kids[1].style.left=r.b+'%'; kids[2].style.left=r.e+'%';
+      kids[3].style.left=r.b+'%'; kids[3].textContent=r.b+'%';
+      kids[4].style.left=r.e+'%'; kids[4].textContent=r.e+'%';
+      row.lastElementChild.textContent='+'+r.span;
+    });
+    var who=(s.sex==='all'?'young people':s.sex==='F'?'young women':'young men')+(s.site==='all'?' across all three sites':' in Site '+s.site);
+    var best=out.slice().sort(function(a,b){return b.span-a.span;})[0], low=out.slice().sort(function(a,b){return a.e-b.e;})[0];
+    document.getElementById('summary').textContent=N+' respondents at endline, '+Math.round(F/N*100)+'% of them young women.';
+    document.getElementById('advice').textContent= best.label===low.label
+      ? best.label+' grew the most for '+who+' (+'+best.span+' points), yet it is still the weakest area at '+low.e+'%. Knowing is not yet doing: the next cycle should put more time into practice and follow-up.'
+      : best.label+' grew the most for '+who+' (+'+best.span+' points). '+low.label+' is still the weakest area at '+low.e+'%, so that is where I would put the next cycle’s effort.';
   }
-  document.querySelectorAll('.seg').forEach(seg=>seg.addEventListener('click',e=>{
-    const b=e.target.closest('button'); if(!b) return;
-    seg.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b?'true':'false'));
-    state[seg.dataset.filter]=b.dataset.v; render();
-  }));
-  chart.addEventListener('pointermove',e=>{
-    const r=e.target.closest('.bar-row'); if(!r||!current){ tip.classList.remove('show'); return; }
-    const k=r.dataset.k, i=r.classList.contains('end')?1:0, dom=DOMS.find(d=>d[0]===k)[1];
-    tip.innerHTML=`<b>${dom} · ${r.dataset.p}</b><br>${current[k][i].toFixed(1)}% meet the standard<br>n = ${current.N} respondents`;
-    const cr=chart.getBoundingClientRect();
-    tip.style.left=Math.min(e.clientX-cr.left+14,cr.width-tip.offsetWidth-4)+'px';
-    tip.style.top=Math.max(0,e.clientY-cr.top-70)+'px'; tip.classList.add('show');
-  });
-  chart.addEventListener('pointerleave',()=>tip.classList.remove('show'));
-  const tb=document.getElementById('toggle-table'), tv=document.getElementById('table-view'), ax=document.getElementById('axis');
-  tb.addEventListener('click',()=>{ const open=tv.hidden; tv.hidden=!open; chart.hidden=open; ax.hidden=open; tb.textContent=open?'Show as chart':'Show as table'; tb.setAttribute('aria-expanded',String(open)); });
   render();
+  /* gentle reveal for sections below the fold */
+  if(!matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window){
+    var els=[].slice.call(document.querySelectorAll('section > *, .case, .job'));
+    els.forEach(function(el){ if(el.getBoundingClientRect().top>innerHeight){ el.style.opacity=0; el.style.transform='translateY(20px)'; el.style.transition='opacity .7s ease, transform .7s ease'; }});
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){ if(e.isIntersecting){ e.target.style.opacity=1; e.target.style.transform='none'; io.unobserve(e.target);} });},{rootMargin:'0px 0px -6% 0px'});
+    els.forEach(function(el){ io.observe(el); });
+  }
 })();
 </script>
 </body>
