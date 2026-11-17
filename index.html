@@ -39,6 +39,58 @@ a{color:#f2b400}a:hover{color:#ffd04d}
 }
 @media (prefers-reduced-motion:reduce){.dot,.link{transition:none}}
 </style>
+<style>
+.band{height:132px;background-size:auto 132px!important}
+.band.thin{height:88px;background-size:auto 88px!important}
+.kd-outer{max-width:1320px;margin:0 auto;padding:0 24px}
+.kd{background:#e9dfcc;border-radius:30px;overflow:hidden;color:#14100b;position:relative}
+.kd::before{content:"";position:absolute;left:0;right:0;top:0;height:250px;background:#000 url(kitenge.svg) repeat-x 0 100%/auto 22px;border-bottom:0}
+.kd-head{position:relative;display:flex;justify-content:space-between;align-items:flex-start;gap:24px;flex-wrap:wrap;padding:40px 40px 28px}
+.kd-title{margin:0;font-weight:800;font-size:clamp(28px,3.4vw,44px);line-height:1.05;text-transform:uppercase;letter-spacing:.01em;color:#f2b400}
+.kd-sub{margin:8px 0 0;font-size:16px;color:#e9dfcc}
+.kd-filters{background:#fbf6ec;border-radius:20px;padding:16px 20px;display:flex;flex-direction:column;gap:12px;box-shadow:0 18px 30px -18px rgba(0,0,0,.6)}
+.kd-fgroup{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.kd-fgroup > span{font-size:13px;font-weight:700;color:#5c5145;width:34px}
+.kd .seg{display:flex;gap:6px;flex-wrap:wrap}
+.kd .seg button{font:inherit;font-size:14px;font-weight:600;color:#14100b;background:#efe5d3;border:0;border-radius:999px;padding:9px 15px;min-height:40px;cursor:pointer}
+.kd .seg button:hover{background:#e3d5bc}
+.kd .seg button[aria-pressed="true"]{background:#14100b;color:#f2b400}
+.kd-grid{position:relative;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:20px;padding:0 40px 40px}
+.kd-card{background:#fbf6ec;border-radius:22px;padding:24px;box-shadow:0 18px 34px -24px rgba(20,16,11,.55);min-width:0}
+.kd-card.dark{background:#14100b;color:#f3ead9}
+.kd-card.dark .c-s{color:#bfb19a}
+.kd-card.insight{background:#f2b400;display:flex;flex-direction:column;justify-content:center}
+.s3{grid-column:span 3}.s4{grid-column:span 4}.s6{grid-column:span 6}.s8{grid-column:span 8}
+.kpi{display:flex;gap:16px;align-items:flex-start}
+.kpi-ic{flex:none;width:46px;height:46px;padding:9px;border-radius:14px;background:#14100b;stroke:#f2b400;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;color:#f2b400}
+.kpi-t{margin:0;font-weight:700;font-size:18px;line-height:1.2}
+.kpi-s{margin:2px 0 0;font-size:13.5px;color:#5c5145}
+.kpi-v{margin:10px 0 0;font-weight:800;font-size:34px;line-height:1;font-variant-numeric:tabular-nums}
+.c-t{margin:0;font-weight:700;font-size:19px;line-height:1.25}
+.c-s{margin:2px 0 0;font-size:13.5px;color:#5c5145}
+.leg{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;color:#5c5145;margin:14px 0 4px}
+.leg i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.leg i.dash{width:18px;height:0;border-top:2px dashed #14100b;border-radius:0;vertical-align:3px}
+.chart{display:block;width:100%;height:auto;margin-top:8px;overflow:visible}
+.chart text{font-family:Poppins,'Segoe UI',sans-serif}
+.chart rect,.chart path,.chart circle{transition:all .55s cubic-bezier(.2,.8,.2,1)}
+.donut-wrap{display:flex;align-items:center;gap:20px;margin-top:18px;flex-wrap:wrap}
+.donut-wrap svg{width:min(190px,100%);flex:none}
+.dleg{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;font-size:14px;flex:1;min-width:120px}
+.dleg li{display:flex;align-items:center;gap:8px}
+.dleg i{width:12px;height:12px;border-radius:3px;flex:none}
+.dleg b{margin-left:auto;font-variant-numeric:tabular-nums}
+.tlist{display:flex;flex-direction:column;gap:14px;margin-top:18px}
+.trow{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:8px;align-items:center;font-size:15px}
+.pill{display:inline-flex;align-items:center;justify-content:center;min-width:58px;padding:6px 12px;border-radius:999px;font-weight:700;font-size:14px;font-variant-numeric:tabular-nums;background:#efe5d3}
+.pill.dark{background:#14100b;color:#f2b400}
+.status{grid-column:1/-1;display:flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;margin-top:-2px}
+.status.ok{color:#0b6b52}.status.below{color:#9a3412}
+.status svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.adv{margin:10px 0 0;font-size:clamp(18px,1.8vw,22px);line-height:1.5;font-weight:500}
+@media (max-width:1060px){.s3{grid-column:span 6}.s4{grid-column:span 6}.s6,.s8{grid-column:span 12}}
+@media (max-width:640px){.s3,.s4,.s6,.s8{grid-column:span 12}.kd-grid{padding:0 16px 16px;gap:14px}.kd-head{padding:28px 16px 20px}.kd-outer{padding:0 12px}.band{height:96px;background-size:auto 96px!important}}
+</style>
 </head>
 <body>
 
@@ -99,50 +151,89 @@ a{color:#f2b400}a:hover{color:#ffd04d}
 </div>
 
 <!-- live dashboard -->
-<section id="data" class="wrap" style="padding-top:112px">
-  <div style="display:flex;gap:12px;align-items:center;margin-bottom:18px"><span aria-hidden="true" style="display:flex;width:36px;height:6px"><span style="flex:1;background:#f3ead9"></span><span style="flex:1;background:#f2b400"></span><span style="flex:1;background:#d9382a"></span></span><span style="font-size:15px;font-weight:700;color:#f2b400">Read the data the way I do</span></div>
-  <h2 style="margin:0 0 16px;font-family:Poppins,'Segoe UI',sans-serif;font-weight:700;font-size:clamp(32px,4vw,52px);line-height:1.05;letter-spacing:-.02em;max-width:18ch">Did the programme change what young people do?</h2>
-  <p style="margin:0 0 40px;color:#bfb19a;max-width:62ch">A knowledge, attitudes and practices survey, before and after a youth programme. Pick who you want to look at. The figures are made up for this demo; the way of reading them is how I work with real programme data.</p>
+<section id="data" style="padding-top:112px">
+  <div class="wrap">
+    <div style="display:flex;gap:12px;align-items:center;margin-bottom:18px"><span aria-hidden="true" style="display:flex;width:36px;height:6px"><span style="flex:1;background:#f3ead9"></span><span style="flex:1;background:#f2b400"></span><span style="flex:1;background:#d9382a"></span></span><span style="font-size:15px;font-weight:700;color:#f2b400">Read the data the way I do</span></div>
+    <h2 style="margin:0 0 16px;font-family:Poppins,'Segoe UI',sans-serif;font-weight:700;font-size:clamp(32px,4vw,52px);line-height:1.05;letter-spacing:-.02em;max-width:20ch">Did the programme change what young people do?</h2>
+    <p style="margin:0 0 40px;color:#bfb19a;max-width:62ch">A knowledge, attitudes and practices survey across three rounds of a youth programme. Use the filters to look at young women, young men or one site. The figures are made up for this demo; the way of reading them is how I work with real programme data.</p>
+  </div>
 
-  <div class="dashcard" style="background:#1d1811;border:1px solid rgba(243,234,217,.14);border-radius:24px;padding:36px">
-    <div style="display:flex;flex-wrap:wrap;gap:28px;align-items:center;justify-content:space-between">
-      <div style="display:flex;flex-wrap:wrap;gap:28px">
-        <div role="group" aria-label="Sex" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
-          <span style="font-size:14px;color:#bfb19a">Sex</span>
-          <div class="seg" id="seg-sex" style="display:flex;gap:8px;flex-wrap:wrap">
-            
-          </div>
+  <div class="kd-outer">
+    <div class="kd">
+      <div class="kd-head">
+        <div>
+          <p class="kd-title">KAP Survey Dashboard</p>
+          <p class="kd-sub">Youth programme · baseline, midline &amp; endline · <span style="color:#f2b400">demo data</span></p>
         </div>
-        <div role="group" aria-label="Site" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
-          <span style="font-size:14px;color:#bfb19a">Site</span>
-          <div class="seg" id="seg-site" style="display:flex;gap:8px;flex-wrap:wrap">
-            
-          </div>
+        <div class="kd-filters">
+          <div role="group" aria-label="Sex" class="kd-fgroup"><span>Sex</span><div class="seg" id="seg-sex"></div></div>
+          <div role="group" aria-label="Site" class="kd-fgroup"><span>Site</span><div class="seg" id="seg-site"></div></div>
         </div>
       </div>
-      <p style="margin:0;font-size:13px;font-weight:700;color:#14100b;background:#f3ead9;border-radius:6px;padding:4px 10px">Demo data</p>
-    </div>
 
-    <p style="margin:28px 0 8px;font-size:17px"><span id="summary"></span></p>
-    <div style="display:flex;gap:24px;flex-wrap:wrap;font-size:14px;color:#bfb19a;margin-bottom:12px">
-      <span style="display:inline-flex;align-items:center;gap:8px"><span aria-hidden="true" style="width:14px;height:14px;border-radius:50%;border:3px solid #c94435;box-sizing:border-box"></span>Baseline</span>
-      <span style="display:inline-flex;align-items:center;gap:8px"><span aria-hidden="true" style="width:14px;height:14px;border-radius:50%;background:#b98800"></span>Endline</span>
-      <span>Share of respondents meeting the standard</span>
-    </div>
+      <div class="kd-grid">
+        <!-- KPI row -->
+        <div class="kd-card kpi s3">
+          <svg class="kpi-ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19c.6-3.2 2.8-5 5.5-5s4.9 1.8 5.5 5"/><circle cx="17" cy="9" r="2.4"/><path d="M15.5 14.2c2.3-.2 4.4 1.2 5 4.8"/></svg>
+          <div><p class="kpi-t">Respondents</p><p class="kpi-s">Surveyed at endline</p><p class="kpi-v" id="k-n">491</p></div>
+        </div>
+        <div class="kd-card kpi s3">
+          <svg class="kpi-ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="9" r="5"/><path d="M12 14v7M9 18h6"/></svg>
+          <div><p class="kpi-t">Young women</p><p class="kpi-s">Share of respondents</p><p class="kpi-v" id="k-f">51%</p></div>
+        </div>
+        <div class="kd-card kpi s3">
+          <svg class="kpi-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg>
+          <div><p class="kpi-t">Average gain</p><p class="kpi-s">Baseline to endline</p><p class="kpi-v" id="k-g">+23 pp</p></div>
+        </div>
+        <div class="kd-card kpi s3">
+          <svg class="kpi-ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg>
+          <div><p class="kpi-t">On target</p><p class="kpi-s">Domains at the 70% target</p><p class="kpi-v" id="k-t">0 of 3</p></div>
+        </div>
 
-    <div id="rows" style="display:flex;flex-direction:column"></div>
-    <div class="drow axisrow" style="display:grid;grid-template-columns:150px minmax(0,1fr) 92px;gap:20px;font-size:12px;color:#bfb19a">
-      <span></span>
-      <div style="display:flex;justify-content:space-between"><span>0%</span><span>25%</span><span>50%</span><span>75%</span><span>100%</span></div>
-      <span style="text-align:right">change</span>
-    </div>
+        <!-- chart row -->
+        <div class="kd-card s4">
+          <p class="c-t">Baseline vs endline</p><p class="c-s">% meeting the standard, by domain</p>
+          <div class="leg"><span><i style="background:#b02a1c"></i>Baseline</span><span><i style="background:#c99000"></i>Endline</span></div>
+          <svg id="ch-bars" class="chart" viewBox="0 0 360 230" role="img" aria-label="Baseline and endline scores by domain"></svg>
+        </div>
+        <div class="kd-card dark s4">
+          <p class="c-t">Change since baseline</p><p class="c-s">Percentage points gained, by domain</p>
+          <svg id="ch-change" class="chart" viewBox="0 0 360 230" role="img" aria-label="Percentage point change by domain"></svg>
+        </div>
+        <div class="kd-card s4">
+          <p class="c-t">Respondents by site</p><p class="c-s">Endline sample for the selected group</p>
+          <div class="donut-wrap"><svg id="ch-donut" viewBox="0 0 200 200" role="img" aria-label="Respondents by site"></svg><ul id="donut-leg" class="dleg"></ul></div>
+        </div>
 
-    <div style="margin-top:32px;padding:24px 28px;border-radius:16px;background:#f2b400;color:#14100b">
-      <p style="margin:0 0 6px;font-size:14px;font-weight:700">What I would tell the programme team</p>
-      <p style="margin:0;font-size:19px;line-height:1.5"><span id="advice"></span></p>
+        <!-- trend + gender + target -->
+        <div class="kd-card s6">
+          <p class="c-t">Progress across the three rounds</p><p class="c-s">% meeting the standard at baseline, midline and endline</p>
+          <div class="leg"><span><i style="background:#c99000"></i>Knowledge</span><span><i style="background:#b02a1c"></i>Attitudes</span><span><i style="background:#008c7e"></i>Practices</span><span><i class="dash"></i>Target 70%</span></div>
+          <svg id="ch-line" class="chart" viewBox="0 0 560 250" role="img" aria-label="Scores across baseline, midline and endline"></svg>
+        </div>
+        <div class="kd-card s3">
+          <p class="c-t">Gender gap at endline</p><p class="c-s">Young women vs young men</p>
+          <div class="leg"><span><i style="background:#008c7e"></i>Women</span><span><i style="background:#c99000"></i>Men</span></div>
+          <svg id="ch-gender" class="chart" viewBox="0 0 280 250" role="img" aria-label="Endline scores for young women and young men"></svg>
+        </div>
+        <div class="kd-card s3">
+          <p class="c-t">Target vs actual</p><p class="c-s">Endline against the 70% target</p>
+          <div id="targets" class="tlist"></div>
+        </div>
+
+        <!-- insight + top gains -->
+        <div class="kd-card insight s8">
+          <p class="c-t" style="color:#14100b">What I would tell the programme team</p>
+          <p id="advice" class="adv"></p>
+        </div>
+        <div class="kd-card s4">
+          <p class="c-t">Biggest gains in practices</p><p class="c-s">Site and group, baseline to endline</p>
+          <div id="gains" class="tlist"></div>
+        </div>
+      </div>
     </div>
+    <p class="wrap" style="margin:16px auto 0;font-size:14px;color:#bfb19a">In my day-to-day work I build these views in R Shiny and Power BI on live programme data.</p>
   </div>
-  <p style="margin:16px 0 0;font-size:14px;color:#bfb19a">In my day-to-day work I build these views in R Shiny and Power BI on live programme data.</p>
 </section>
 
 <!-- MEAL work -->
@@ -257,67 +348,144 @@ a{color:#f2b400}a:hover{color:#ffd04d}
 
 <script>
 (function(){
+  /* ---------- demo data (fictional) ---------- */
+  // n = endline respondents; each domain = [baseline, midline, endline] % meeting the standard
   var DATA=[
-    {site:'A',sex:'F',n:84, K:[41,72],A:[48,69],P:[29,55]},
-    {site:'A',sex:'M',n:76, K:[46,70],A:[52,66],P:[35,54]},
-    {site:'B',sex:'F',n:102,K:[38,74],A:[44,71],P:[24,61]},
-    {site:'B',sex:'M',n:95, K:[44,69],A:[50,64],P:[33,52]},
-    {site:'C',sex:'F',n:63, K:[35,58],A:[42,57],P:[22,38]},
-    {site:'C',sex:'M',n:71, K:[40,61],A:[47,59],P:[30,43]}
+    {site:'A',sex:'F',n:84, K:[41,58,72],A:[48,60,69],P:[29,41,55]},
+    {site:'A',sex:'M',n:76, K:[46,59,70],A:[52,60,66],P:[35,45,54]},
+    {site:'B',sex:'F',n:102,K:[38,57,74],A:[44,59,71],P:[24,44,61]},
+    {site:'B',sex:'M',n:95, K:[44,57,69],A:[50,57,64],P:[33,43,52]},
+    {site:'C',sex:'F',n:63, K:[35,47,58],A:[42,50,57],P:[22,30,38]},
+    {site:'C',sex:'M',n:71, K:[40,51,61],A:[47,53,59],P:[30,36,43]}
   ];
-  var DOMS=[['K','Knowledge','what they know'],['A','Attitudes','what they believe'],['P','Practices','what they do']];
+  var DOMS=[['K','Knowledge'],['A','Attitudes'],['P','Practices']];
+  var TARGET=70, GOLD='#c99000', RED='#b02a1c', TEAL='#008c7e', INK='#14100b', SOFT='#5c5145', GRID='rgba(20,16,11,.12)';
+  var SITE_COL={A:GOLD,B:RED,C:TEAL};
   var s={sex:'all',site:'all'};
+  var NS='http://www.w3.org/2000/svg';
+
+  function el(tag,attrs,text){var e=document.createElementNS(NS,tag);for(var k in attrs)e.setAttribute(k,attrs[k]);if(text!=null)e.textContent=text;return e;}
+  function tip(node,text){node.appendChild(el('title',{},text));return node;}
+  function pick(f){return DATA.filter(function(d){return (!f.sex||f.sex==='all'||d.sex===f.sex)&&(!f.site||f.site==='all'||d.site===f.site);});}
+  function wavg(rows,k,i){var n=rows.reduce(function(a,d){return a+d.n;},0);return n?rows.reduce(function(a,d){return a+d[k][i]*d.n;},0)/n:0;}
+  function topBar(x,y,w,h,r){r=Math.min(r,h,w/2);return 'M'+x+','+(y+h)+'V'+(y+r)+'Q'+x+','+y+' '+(x+r)+','+y+'H'+(x+w-r)+'Q'+(x+w)+','+y+' '+(x+w)+','+(y+r)+'V'+(y+h)+'Z';}
+  function rightBar(x,y,w,h,r){r=Math.min(r,w,h/2);return 'M'+x+','+y+'H'+(x+w-r)+'Q'+(x+w)+','+y+' '+(x+w)+','+(y+r)+'V'+(y+h-r)+'Q'+(x+w)+','+(y+h)+' '+(x+w-r)+','+(y+h)+'H'+x+'Z';}
+
+  /* grouped vertical bars */
+  function grouped(svg,cats,series,W,H){
+    svg.innerHTML='';var L=34,R=6,T=14,B=30,pw=W-L-R,ph=H-T-B;
+    [0,25,50,75,100].forEach(function(v){var y=T+ph-ph*v/100;svg.appendChild(el('line',{x1:L,x2:W-R,y1:y,y2:y,stroke:GRID}));svg.appendChild(el('text',{x:L-8,y:y+4,'text-anchor':'end','font-size':11,fill:SOFT},v+'%'));});
+    var gw=pw/cats.length,bw=Math.min(30,(gw-26)/series.length);
+    cats.forEach(function(c,ci){
+      var gx=L+ci*gw+(gw-(bw*series.length+2*(series.length-1)))/2;
+      series.forEach(function(sr,si){
+        var v=sr.values[ci],h=ph*v/100,x=gx+si*(bw+2),y=T+ph-h;
+        svg.appendChild(tip(el('path',{d:topBar(x,y,bw,h,4),fill:sr.color}),c+' · '+sr.name+': '+Math.round(v)+'%'));
+        svg.appendChild(el('text',{x:x+bw/2,y:y-5,'text-anchor':'middle','font-size':11,'font-weight':si===series.length-1?700:500,fill:si===series.length-1?INK:SOFT},Math.round(v)));
+      });
+      svg.appendChild(el('text',{x:L+ci*gw+gw/2,y:H-8,'text-anchor':'middle','font-size':12.5,'font-weight':600,fill:INK},c));
+    });
+  }
+
+  /* horizontal change bars on the dark card */
+  function change(svg,items,W,H){
+    svg.innerHTML='';var L=86,R=40,T=10,B=26,pw=W-L-R,ph=H-T-B,max=40;
+    [0,10,20,30,40].forEach(function(v){var x=L+pw*v/max;svg.appendChild(el('line',{x1:x,x2:x,y1:T,y2:T+ph,stroke:'rgba(243,234,217,.14)'}));svg.appendChild(el('text',{x:x,y:H-6,'text-anchor':'middle','font-size':11,fill:'#bfb19a'},'+'+v));});
+    var rh=ph/items.length,bh=Math.min(30,rh*.5);
+    items.forEach(function(it,i){
+      var y=T+i*rh+(rh-bh)/2,w=Math.max(2,pw*it.v/max);
+      svg.appendChild(el('text',{x:L-12,y:y+bh/2+4,'text-anchor':'end','font-size':13,'font-weight':600,fill:'#f3ead9'},it.label));
+      svg.appendChild(tip(el('path',{d:rightBar(L,y,w,bh,5),fill:'#f2b400'}),it.label+': +'+Math.round(it.v)+' percentage points'));
+      svg.appendChild(el('text',{x:L+w+8,y:y+bh/2+5,'font-size':14,'font-weight':800,fill:'#f2b400'},'+'+Math.round(it.v)));
+    });
+  }
+
+  /* donut */
+  function donut(svg,parts,total,active){
+    svg.innerHTML='';var cx=100,cy=100,r=72,sw=28,C=2*Math.PI*r,off=0,gap=2;
+    svg.appendChild(el('circle',{cx:cx,cy:cy,r:r,fill:'none',stroke:'#efe5d3','stroke-width':sw}));
+    parts.forEach(function(p){
+      var len=C*p.v/total;
+      var c=el('circle',{cx:cx,cy:cy,r:r,fill:'none',stroke:p.color,'stroke-width':sw,'stroke-dasharray':Math.max(0,len-gap)+' '+(C-len+gap),'stroke-dashoffset':-off,transform:'rotate(-90 100 100)',opacity:(active==='all'||active===p.key)?1:.28});
+      svg.appendChild(tip(c,p.label+': '+p.v+' respondents ('+Math.round(p.v/total*100)+'%)'));off+=len;
+    });
+    svg.appendChild(el('text',{x:cx,y:cy+4,'text-anchor':'middle','font-size':30,'font-weight':800,fill:INK},total));
+    svg.appendChild(el('text',{x:cx,y:cy+24,'text-anchor':'middle','font-size':12,fill:SOFT},'respondents'));
+  }
+
+  /* line chart across rounds */
+  function line(svg,series,W,H){
+    svg.innerHTML='';var L=40,R=96,T=16,B=30,pw=W-L-R,ph=H-T-B,xs=['Baseline','Midline','Endline'];
+    function X(i){return L+pw*i/2;} function Y(v){return T+ph-ph*v/100;}
+    [0,25,50,75,100].forEach(function(v){svg.appendChild(el('line',{x1:L,x2:L+pw,y1:Y(v),y2:Y(v),stroke:GRID}));svg.appendChild(el('text',{x:L-8,y:Y(v)+4,'text-anchor':'end','font-size':11,fill:SOFT},v+'%'));});
+    svg.appendChild(el('line',{x1:L,x2:L+pw,y1:Y(TARGET),y2:Y(TARGET),stroke:INK,'stroke-width':1.5,'stroke-dasharray':'5 5'}));
+    xs.forEach(function(x,i){svg.appendChild(el('text',{x:X(i),y:H-8,'text-anchor':i===0?'start':i===2?'end':'middle','font-size':12.5,'font-weight':600,fill:INK},x));});
+    // place end labels without collisions
+    var ends=series.map(function(sr){return {sr:sr,y:Y(sr.values[2])};}).sort(function(a,b){return a.y-b.y;});
+    for(var i=1;i<ends.length;i++){if(ends[i].y-ends[i-1].y<16)ends[i].y=ends[i-1].y+16;}
+    series.forEach(function(sr){
+      svg.appendChild(el('polyline',{points:sr.values.map(function(v,i){return X(i)+','+Y(v);}).join(' '),fill:'none',stroke:sr.color,'stroke-width':2.5,'stroke-linejoin':'round','stroke-linecap':'round'}));
+      sr.values.forEach(function(v,i){svg.appendChild(tip(el('circle',{cx:X(i),cy:Y(v),r:5,fill:sr.color,stroke:'#fbf6ec','stroke-width':2}),sr.name+' · '+xs[i]+': '+Math.round(v)+'%'));});
+    });
+    ends.forEach(function(e){svg.appendChild(el('text',{x:L+pw+12,y:e.y+4,'font-size':12.5,'font-weight':700,fill:INK},Math.round(e.sr.values[2])+'% '+e.sr.name));});
+  }
+
+  /* filter buttons */
   var OPTS={sex:[['all','Everyone'],['F','Young women'],['M','Young men']],site:[['all','All sites'],['A','Site A'],['B','Site B'],['C','Site C']]};
   ['sex','site'].forEach(function(key){
     var box=document.getElementById('seg-'+key);
     OPTS[key].forEach(function(o){
-      var b=document.createElement('button'); b.type='button'; b.textContent=o[1]; b.id='f-'+key+'-'+o[0];
+      var b=document.createElement('button');b.type='button';b.textContent=o[1];b.id='f-'+key+'-'+o[0];
       b.setAttribute('aria-pressed',s[key]===o[0]?'true':'false');
-      b.addEventListener('click',function(){ s[key]=o[0]; box.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false');}); render(); });
+      b.addEventListener('click',function(){s[key]=o[0];box.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false');});render();});
       box.appendChild(b);
     });
   });
-  var rowsEl=document.getElementById('rows');
-  DOMS.forEach(function(dm){ var r={label:dm[1],sub:dm[2],b:0,e:0,span:0,bt:'',et:'',gain:'',aria:''}; rowsEl.insertAdjacentHTML('beforeend',`<div class="drow" style="display:grid;grid-template-columns:150px minmax(0,1fr) 92px;gap:20px;align-items:center;padding:20px 0;border-top:1px solid rgba(243,234,217,.1)">
-          <div><p style="margin:0;font-weight:700">${r.label}</p><p style="margin:0;font-size:14px;color:#bfb19a">${r.sub}</p></div>
-          <div role="img" aria-label="${r.aria}" style="position:relative;height:44px;background:linear-gradient(90deg,rgba(243,234,217,.1) 1px,transparent 1px) 0 0/25% 100%">
-            <div class="link" style="left:${r.b}%;width:${r.span}%"></div>
-            <div class="dot" style="left:${r.b}%;border:3px solid #c94435;background:#1d1811;box-sizing:border-box"></div>
-            <div class="dot" style="left:${r.e}%;background:#b98800;box-shadow:0 0 0 3px #1d1811"></div>
-            <span style="position:absolute;top:-4px;left:${r.b}%;transform:translateX(-50%);font-size:13px;color:#bfb19a;transition:left .6s">${r.bt}</span>
-            <span style="position:absolute;bottom:-6px;left:${r.e}%;transform:translateX(-50%);font-size:13px;font-weight:700;transition:left .6s">${r.et}</span>
-          </div>
-          <p style="margin:0;text-align:right;font-family:Poppins,'Segoe UI',sans-serif;font-weight:700;font-size:20px;color:#f2b400">${r.gain}</p>
-        </div>`); });
+
+  var CHECK='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+  var ALERT='<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5.5M12 16.5v.01"/></svg>';
+
   function render(){
-    var rows=DATA.filter(function(d){return (s.sex==='all'||d.sex===s.sex)&&(s.site==='all'||d.site===s.site);});
-    var N=rows.reduce(function(a,d){return a+d.n;},0), F=rows.filter(function(d){return d.sex==='F';}).reduce(function(a,d){return a+d.n;},0);
-    var avg=function(k,i){return rows.reduce(function(a,d){return a+d[k][i]*d.n;},0)/N;};
-    var out=DOMS.map(function(dm){var b=Math.round(avg(dm[0],0)),e=Math.round(avg(dm[0],1));return {label:dm[1],b:b,e:e,span:e-b};});
-    [].forEach.call(rowsEl.children,function(row,i){
-      var r=out[i], track=row.querySelector('[role="img"]');
-      track.setAttribute('aria-label',r.label+': '+r.b+'% at baseline, '+r.e+'% at endline');
-      var kids=track.children;
-      kids[0].style.left=r.b+'%'; kids[0].style.width=r.span+'%';
-      kids[1].style.left=r.b+'%'; kids[2].style.left=r.e+'%';
-      kids[3].style.left=r.b+'%'; kids[3].textContent=r.b+'%';
-      kids[4].style.left=r.e+'%'; kids[4].textContent=r.e+'%';
-      row.lastElementChild.textContent='+'+r.span;
-    });
+    var rows=pick(s), N=rows.reduce(function(a,d){return a+d.n;},0), F=rows.filter(function(d){return d.sex==='F';}).reduce(function(a,d){return a+d.n;},0);
+    var dom=DOMS.map(function(dm){return {k:dm[0],label:dm[1],b:wavg(rows,dm[0],0),m:wavg(rows,dm[0],1),e:wavg(rows,dm[0],2)};});
+    var gainAvg=dom.reduce(function(a,d){return a+d.e-d.b;},0)/3, onT=dom.filter(function(d){return d.e>=TARGET;}).length;
+    document.getElementById('k-n').textContent=N;
+    document.getElementById('k-f').textContent=Math.round(F/N*100)+'%';
+    document.getElementById('k-g').textContent='+'+Math.round(gainAvg)+' pp';
+    document.getElementById('k-t').textContent=onT+' of 3';
+
+    grouped(document.getElementById('ch-bars'),dom.map(function(d){return d.label;}),[{name:'Baseline',color:RED,values:dom.map(function(d){return d.b;})},{name:'Endline',color:GOLD,values:dom.map(function(d){return d.e;})}],360,230);
+    change(document.getElementById('ch-change'),dom.map(function(d){return {label:d.label,v:d.e-d.b};}),360,230);
+
+    var bySite=['A','B','C'].map(function(k){return {key:k,label:'Site '+k,color:SITE_COL[k],v:pick({sex:s.sex,site:k}).reduce(function(a,d){return a+d.n;},0)};});
+    var tot=bySite.reduce(function(a,p){return a+p.v;},0);
+    donut(document.getElementById('ch-donut'),bySite,tot,s.site);
+    document.getElementById('donut-leg').innerHTML=bySite.map(function(p){return '<li style="opacity:'+((s.site==='all'||s.site===p.key)?1:.45)+'"><i style="background:'+p.color+'"></i>'+p.label+'<b>'+p.v+' · '+Math.round(p.v/tot*100)+'%</b></li>';}).join('');
+
+    line(document.getElementById('ch-line'),[{name:'Knowledge',color:GOLD,values:[dom[0].b,dom[0].m,dom[0].e]},{name:'Attitudes',color:RED,values:[dom[1].b,dom[1].m,dom[1].e]},{name:'Practices',color:TEAL,values:[dom[2].b,dom[2].m,dom[2].e]}],560,250);
+
+    var fr=pick({sex:'F',site:s.site}), mr=pick({sex:'M',site:s.site});
+    grouped(document.getElementById('ch-gender'),DOMS.map(function(d){return d[1];}),[{name:'Young women',color:TEAL,values:DOMS.map(function(d){return wavg(fr,d[0],2);})},{name:'Young men',color:GOLD,values:DOMS.map(function(d){return wavg(mr,d[0],2);})}],280,250);
+
+    document.getElementById('targets').innerHTML=dom.map(function(d){var ok=d.e>=TARGET;return '<div class="trow" style="grid-template-columns:auto auto 1fr"><span style="font-weight:600;grid-column:1/-1">'+d.label+'</span><span class="pill">Target 70%</span><span class="pill dark">Actual '+Math.round(d.e)+'%</span><span></span><span class="status '+(ok?'ok':'below')+'">'+(ok?CHECK+'On target':ALERT+'Below target by '+Math.round(TARGET-d.e)+' points')+'</span></div>';}).join('');
+
+    var groups=DATA.filter(function(d){return (s.sex==='all'||d.sex===s.sex)&&(s.site==='all'||d.site===s.site);}).map(function(d){return {label:'Site '+d.site+' · '+(d.sex==='F'?'young women':'young men'),g:d.P[2]-d.P[0]};}).sort(function(a,b){return b.g-a.g;}).slice(0,3);
+    document.getElementById('gains').innerHTML=groups.map(function(g){return '<div class="trow" style="grid-template-columns:minmax(0,1fr) auto"><span>'+g.label+'</span><span class="pill dark">+'+g.g+' pp</span></div>';}).join('');
+
     var who=(s.sex==='all'?'young people':s.sex==='F'?'young women':'young men')+(s.site==='all'?' across all three sites':' in Site '+s.site);
-    var best=out.slice().sort(function(a,b){return b.span-a.span;})[0], low=out.slice().sort(function(a,b){return a.e-b.e;})[0];
-    document.getElementById('summary').textContent=N+' respondents at endline, '+Math.round(F/N*100)+'% of them young women.';
+    var best=dom.slice().sort(function(a,b){return (b.e-b.b)-(a.e-a.b);})[0], low=dom.slice().sort(function(a,b){return a.e-b.e;})[0];
     document.getElementById('advice').textContent= best.label===low.label
-      ? best.label+' grew the most for '+who+' (+'+best.span+' points), yet it is still the weakest area at '+low.e+'%. Knowing is not yet doing: the next cycle should put more time into practice and follow-up.'
-      : best.label+' grew the most for '+who+' (+'+best.span+' points). '+low.label+' is still the weakest area at '+low.e+'%, so that is where I would put the next cycle’s effort.';
+      ? best.label+' grew the most for '+who+' (+'+Math.round(best.e-best.b)+' points), yet it is still the weakest area at '+Math.round(low.e)+'%. Knowing is not yet doing: the next cycle should put more time into practice and follow-up.'
+      : best.label+' grew the most for '+who+' (+'+Math.round(best.e-best.b)+' points). '+low.label+' is still the weakest area at '+Math.round(low.e)+'%, '+Math.round(TARGET-low.e)+' points short of target, so that is where I would put the next cycle’s effort.';
   }
   render();
+
   /* gentle reveal for sections below the fold */
   if(!matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window){
-    var els=[].slice.call(document.querySelectorAll('section > *, .case, .job'));
-    els.forEach(function(el){ if(el.getBoundingClientRect().top>innerHeight){ el.style.opacity=0; el.style.transform='translateY(20px)'; el.style.transition='opacity .7s ease, transform .7s ease'; }});
+    var els=[].slice.call(document.querySelectorAll('section .wrap > *, .case, .job, .kd-card'));
+    els.forEach(function(e){ if(e.getBoundingClientRect().top>innerHeight){ e.style.opacity=0; e.style.transform='translateY(20px)'; e.style.transition='opacity .7s ease, transform .7s ease'; }});
     var io=new IntersectionObserver(function(es){es.forEach(function(e){ if(e.isIntersecting){ e.target.style.opacity=1; e.target.style.transform='none'; io.unobserve(e.target);} });},{rootMargin:'0px 0px -6% 0px'});
-    els.forEach(function(el){ io.observe(el); });
+    els.forEach(function(e){ io.observe(e); });
   }
 })();
 </script>
