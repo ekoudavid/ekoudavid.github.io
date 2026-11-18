@@ -42,10 +42,10 @@ a{color:#f2b400}a:hover{color:#ffd04d}
 <style>
 .band{height:132px;background-size:auto 132px!important}
 .band.thin{height:88px;background-size:auto 88px!important}
-.kd-outer{max-width:1320px;margin:0 auto;padding:0 24px}
-.kd{background:#e9dfcc;border-radius:30px;overflow:hidden;color:#14100b;position:relative}
+.kd-outer{width:100%;margin:0;padding:0}
+.kd{background:#e9dfcc;border-radius:0;overflow:hidden;color:#14100b;position:relative}
 .kd::before{content:"";position:absolute;left:0;right:0;top:0;height:250px;background:#000 url(kitenge.svg) repeat-x 0 100%/auto 22px;border-bottom:0}
-.kd-head{position:relative;display:flex;justify-content:space-between;align-items:flex-start;gap:24px;flex-wrap:wrap;padding:40px 40px 28px}
+.kd-head{position:relative;display:flex;justify-content:space-between;align-items:flex-start;gap:24px;flex-wrap:wrap;padding:44px clamp(16px,3vw,56px) 28px}
 .kd-title{margin:0;font-weight:800;font-size:clamp(28px,3.4vw,44px);line-height:1.05;text-transform:uppercase;letter-spacing:.01em;color:#f2b400}
 .kd-sub{margin:8px 0 0;font-size:16px;color:#e9dfcc}
 .kd-filters{background:#fbf6ec;border-radius:20px;padding:16px 20px;display:flex;flex-direction:column;gap:12px;box-shadow:0 18px 30px -18px rgba(0,0,0,.6)}
@@ -55,7 +55,7 @@ a{color:#f2b400}a:hover{color:#ffd04d}
 .kd .seg button{font:inherit;font-size:14px;font-weight:600;color:#14100b;background:#efe5d3;border:0;border-radius:999px;padding:9px 15px;min-height:40px;cursor:pointer}
 .kd .seg button:hover{background:#e3d5bc}
 .kd .seg button[aria-pressed="true"]{background:#14100b;color:#f2b400}
-.kd-grid{position:relative;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:20px;padding:0 40px 40px}
+.kd-grid{position:relative;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:22px;padding:0 clamp(16px,3vw,56px) 48px}
 .kd-card{background:#fbf6ec;border-radius:22px;padding:24px;box-shadow:0 18px 34px -24px rgba(20,16,11,.55);min-width:0}
 .kd-card.dark{background:#14100b;color:#f3ead9}
 .kd-card.dark .c-s{color:#bfb19a}
@@ -89,7 +89,7 @@ a{color:#f2b400}a:hover{color:#ffd04d}
 .status svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
 .adv{margin:10px 0 0;font-size:clamp(18px,1.8vw,22px);line-height:1.5;font-weight:500}
 @media (max-width:1060px){.s3{grid-column:span 6}.s4{grid-column:span 6}.s6,.s8{grid-column:span 12}}
-@media (max-width:640px){.s3,.s4,.s6,.s8{grid-column:span 12}.kd-grid{padding:0 16px 16px;gap:14px}.kd-head{padding:28px 16px 20px}.kd-outer{padding:0 12px}.band{height:96px;background-size:auto 96px!important}}
+@media (max-width:640px){.s3,.s4,.s6,.s8{grid-column:span 12}.kd-grid{padding:0 16px 16px;gap:14px}.kd-head{padding:28px 16px 20px}.kd-outer{padding:0}.band{height:96px;background-size:auto 96px!important}}
 </style>
 </head>
 <body>
